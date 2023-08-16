@@ -168,7 +168,7 @@ class EvaluationDuties(models.Model):
     hod_remarks = models.TextField()
 
     def __str__(self):
-        return f"Activity: {self.activity.name}, Class: {self.class_type}"
+        return f"form: {self.form}"
 
 
 class Publication(models.Model):
@@ -181,7 +181,7 @@ class Publication(models.Model):
     remarks = models.TextField(blank=True, null=True, verbose_name="Remarks by the HoD")
 
     def __str__(self):
-        return f"Publication {self.serial_number}: {self.title_reference}"
+        return f"Publication {self.title_reference}"
     
 
 class ResearchProject(models.Model):

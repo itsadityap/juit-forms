@@ -7,6 +7,18 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
+
+    # User Types
+    USER_TYPE_CHOICES = (
+        (1, 'HOD'),
+        (2, 'Dean'),
+        (3, 'VC'),
+        (4, 'Faculty'),
+    )
+
+    department = models.CharField(max_length=100, null=True)
+    user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=4)
+    
     pass
 
 
@@ -58,6 +70,35 @@ class SelfAppraisalForm(models.Model):
     
     # Articles, Monographs, Technical Reports, Reviews Written
     written_works = models.TextField(blank=True)
+
+    # 18. Membership of Professional Bodies/ National/ International Committees:
+    # 19. Any Other Information:
+    # 20. List of Enclosures:
+
+    member_of_professional_bodies = models.TextField(blank=True)
+    any_other_information = models.TextField(blank=True)
+    list_of_enclosures = models.TextField(blank=True)
+
+
+    # Fields to track the approval status
+    self_approval = models.BooleanField(default=False)   # Means the form is filled by the user
+    hod_approval = models.BooleanField(default=False)    # Checked by HOD
+    # Overall Remarks of HoD:
+    hod_remarks = models.TextField(blank=True)
+
+    dean_approval = models.BooleanField(default=False)   # Approved by Dean
+    # Overall Remarks of Dean:
+    dean_remarks = models.TextField(blank=True)
+
+
+    vc_approval = models.BooleanField(default=False)     # Approved by VC
+    # Overall Remarks of VC:
+    vc_remarks = models.TextField(blank=True)
+
+
+    def __str__(self):
+        return self.name.username
+    
 
 
 
@@ -151,12 +192,52 @@ class ResearchProject(models.Model):
 
     title = models.CharField(max_length=200, verbose_name="Title of Research Project/Consultancy Work")
     sponsoring_agency = models.TextField(verbose_name="Details of Sponsoring Agency")
-    duration_status = models.CharField(max_length=100, verbose_name="Duration, Sanction Date & Status")
+    duration = models.CharField(verbose_name="Duration", max_length=100)
+    # Sanction Date & Status
+    sanction_date = models.DateField(verbose_name="Sanction Date")
+
+    # TODO: MAKE THIS BOOLEEN FIELD
+    status = models.CharField(max_length=100, verbose_name="Status")
+
     amount_sanctioned = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount Sanctioned")
     chief_investigator = models.CharField(max_length=100, verbose_name="Chief or Co Investigator Specify")
+    
+    
     api_score = models.PositiveIntegerField(blank=True, null=True, verbose_name="Self Assessed API Score")
-    hod_remarks = models.TextField(blank=True, null=True, verbose_name="Remarks by the HoD")
+    remarks = models.TextField(blank=True, null=True, verbose_name="Remarks by the HoD")
 
     def __str__(self):
         return self.title
 
+
+# Research Guidance
+class ResearchGuidance(models.Model):
+    level_choices = [
+        ('PhD', 'PhD'),
+        ('DD', 'DD'),
+        ('M Tech', 'M Tech'),
+        ('M Phil', 'M Phil'),
+        ('MS', 'MS'),
+    ]
+
+    status_choices = [
+        ('Completed', 'Completed'),
+        ('Ongoing', 'Ongoing'),
+    ]
+
+    form = models.ForeignKey(SelfAppraisalForm, on_delete=models.CASCADE)
+
+    enrollment_number = models.CharField(max_length=100, verbose_name="Enrollment Number")
+    name_of_student = models.CharField(max_length=100, verbose_name="Name of the Student")
+    title_of_thesis = models.CharField(max_length=200, verbose_name="Title of Thesis/Dissertation/Project")
+    names_of_joint_supervisors = models.CharField(max_length=200, verbose_name="Names of Joint Supervisors")
+    level = models.CharField(max_length=100, choices=level_choices, verbose_name="Level")
+    status = models.CharField(max_length=100, choices=status_choices, verbose_name="Status")
+
+
+    api_score = models.PositiveIntegerField(blank=True, null=True, verbose_name="Self Assessed API Score")
+    remarks = models.TextField(blank=True, null=True, verbose_name="Remarks by the HoD")
+
+
+    def __str__(self):
+        return self.title_of_thesis

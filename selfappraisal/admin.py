@@ -2,10 +2,20 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
-from selfappraisal.models import CustomUser, SelfAppraisalForm, Event, Course, KnowledgeResources, EvaluationDuties,Publication
+from selfappraisal.models import CustomUser, SelfAppraisalForm, Event, Course, KnowledgeResources, EvaluationDuties,Publication,ResearchProject, ResearchGuidance
+
+class CustomUserAdmin(UserAdmin):
+    # Add custom fields to the fieldsets
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        ('Departmenatal info', {'fields': ('department', 'user_type')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email',)}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),        
+    )
 
 
-admin.site.register(CustomUser, UserAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
 
 
 class EventInline(admin.TabularInline):
@@ -71,9 +81,40 @@ class PublicationInline(admin.TabularInline):
     )
     extra = 1
 
+class ResearchProjectInline(admin.TabularInline):
+    model = ResearchProject
+    fields = (
+        'title',
+        'sponsoring_agency',
+        'sanction_date',
+        'duration',
+        'status',
+        'amount_sanctioned',
+        'chief_investigator',
+        'api_score',
+        'remarks'
+    )
+    extra = 1
+
+class ResearchGuidanceInline(admin.TabularInline):
+    model = ResearchGuidance
+    fields = (
+        'enrollment_number', 
+        'name_of_student', 
+        'title_of_thesis', 
+        'names_of_joint_supervisors',
+        'level',
+        'status', 
+        'api_score', 
+        'remarks'
+    )
+    extra = 1
+
+
 @admin.register(SelfAppraisalForm)
 class SelfAppraisalFormAdmin(admin.ModelAdmin):
-    inlines = [EventInline, CourseInline,KnowledgeResourcesInline, EvaluationDutiesInline, PublicationInline]
+    inlines = [EventInline, CourseInline,KnowledgeResourcesInline, EvaluationDutiesInline, PublicationInline,ResearchProjectInline,ResearchGuidanceInline]
+
 
 
 

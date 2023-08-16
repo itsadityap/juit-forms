@@ -30,7 +30,7 @@ class EventInline(admin.TabularInline):
         'attended_organized',
         'remarks',
     )
-    extra = 1
+    extra = 0
 
 class CourseInline(admin.TabularInline):
     model = Course
@@ -43,7 +43,7 @@ class CourseInline(admin.TabularInline):
         'self_assessed_api_score',
         'remarks',
     )
-    extra = 1
+    extra = 0
 
 class KnowledgeResourcesInline(admin.TabularInline):
     model = KnowledgeResources
@@ -55,7 +55,7 @@ class KnowledgeResourcesInline(admin.TabularInline):
         'self_assessed_api_score', 
         'remarks', 
     )
-    extra = 1
+    extra = 0
 
 class EvaluationDutiesInline(admin.TabularInline):
 
@@ -68,7 +68,7 @@ class EvaluationDutiesInline(admin.TabularInline):
         'api_score',
         'hod_remarks',
     )
-    extra = 1
+    extra = 0
 
 class PublicationInline(admin.TabularInline):
     model = Publication
@@ -79,7 +79,7 @@ class PublicationInline(admin.TabularInline):
         'api_score',
         'remarks'
     )
-    extra = 1
+    extra = 0
 
 class ResearchProjectInline(admin.TabularInline):
     model = ResearchProject
@@ -94,7 +94,7 @@ class ResearchProjectInline(admin.TabularInline):
         'api_score',
         'remarks'
     )
-    extra = 1
+    extra = 0
 
 class ResearchGuidanceInline(admin.TabularInline):
     model = ResearchGuidance
@@ -108,13 +108,21 @@ class ResearchGuidanceInline(admin.TabularInline):
         'api_score', 
         'remarks'
     )
-    extra = 1
+    extra = 0
 
 
 @admin.register(SelfAppraisalForm)
 class SelfAppraisalFormAdmin(admin.ModelAdmin):
     inlines = [EventInline, CourseInline,KnowledgeResourcesInline, EvaluationDutiesInline, PublicationInline,ResearchProjectInline,ResearchGuidanceInline]
 
+    fieldsets = (
+        ('Personal Details', {'fields': ('name', 'department', 'qualifications', 'present_designation', 'date_of_joining', 'first_designation', 'present_pay_scale_and_pay', 'areas_of_specialization', 'additional_qualifications', 'pursuing_higher_studies')}),
+        ('Teaching, Learning and Evaluation Activities', {'fields': ('learning_methodology', 'modifications_in_teaching', 'beyond_syllabus')}),
+        ('Project Guidance at UG level', {'fields': ('projects_guided', 'students_guided')}),
+        ('Contribution/ Participation', {'fields': ('students_extra_curricular', 'departmental_activities', 'institute_activities', 'invited_lectures')}),
+        ('Exta Info', {'fields': ('member_of_professional_bodies', 'any_other_information', 'list_of_enclosures')}),
+        ('Approvals', {'fields': ('self_approval', 'hod_approval', 'hod_remarks', 'dean_approval', 'dean_remarks', 'vc_approval', 'vc_remarks')}),
+    )
 
 
 

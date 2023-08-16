@@ -68,8 +68,6 @@ class SelfAppraisalForm(models.Model):
     # Special/Extension/Expert/Invited Lectures Delivered
     invited_lectures = models.TextField(blank=True)
     
-    # Articles, Monographs, Technical Reports, Reviews Written
-    written_works = models.TextField(blank=True)
 
     # 18. Membership of Professional Bodies/ National/ International Committees:
     # 19. Any Other Information:

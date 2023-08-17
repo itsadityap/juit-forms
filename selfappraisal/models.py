@@ -27,34 +27,34 @@ class CustomUser(AbstractUser):
 class SelfAppraisalForm(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # Name
     
-    department = models.CharField(max_length=100, null=True)  # Department
+    department = models.CharField(max_length=100)  # Department
     
-    qualifications = models.CharField(max_length=100,null=True) # Qualifications
+    qualifications = models.CharField(max_length=100,null=True, blank=True) # Qualifications
 
-    present_designation = models.CharField(max_length=100,null=True) # Present Designation
+    present_designation = models.CharField(max_length=100,null=True, blank=True) # Present Designation
     
-    date_of_joining = models.DateField(null=True) # University Joining Date
+    date_of_joining = models.DateField(null=True, blank=True) # University Joining Date
 
-    first_designation = models.CharField(max_length=100,null=True) # First Designation
+    first_designation = models.CharField(max_length=100,null=True, blank=True) # First Designation
 
-    present_pay_scale_and_pay = models.CharField(max_length=100,null=True) # Present Pay Scale & Pay
+    present_pay_scale_and_pay = models.CharField(max_length=100,null=True, blank=True) # Present Pay Scale & Pay
 
-    areas_of_specialization = models.TextField(null=True) # Areas of Specialization and Current Interest
+    areas_of_specialization = models.TextField(null=True, blank=True) # Areas of Specialization and Current Interest
 
-    additional_qualifications = models.TextField(null=True) # Additional Qualification acquired during the year
+    additional_qualifications = models.TextField(null=True, blank=True) # Additional Qualification acquired during the year
 
-    pursuing_higher_studies = models.TextField(null=True) # Pursuing Higher Studies
+    pursuing_higher_studies = models.TextField(null=True, blank=True) # Pursuing Higher Studies
 
-    learning_methodology = models.TextField(null=True) # Participatory/Innovative Teaching Learning Methodologies used (give brief details )
+    learning_methodology = models.TextField(null=True, blank=True) # Participatory/Innovative Teaching Learning Methodologies used (give brief details )
 
-    modifications_in_teaching = models.TextField(null=True) # Any Modification/ Addition to syllabus ( give brief details )
+    modifications_in_teaching = models.TextField(null=True, blank=True) # Any Modification/ Addition to syllabus ( give brief details )
 
-    beyond_syllabus = models.TextField(null=True) # Any Coverage/ Introduction beyond syllabus ( give brief details )
+    beyond_syllabus = models.TextField(null=True, blank=True) # Any Coverage/ Introduction beyond syllabus ( give brief details )
 
     # Number of Projects Guided
 
-    projects_guided = models.PositiveIntegerField(null=True) # UG Projects Guided
-    students_guided = models.PositiveIntegerField(null=True) # UG Students Guided
+    projects_guided = models.PositiveIntegerField(null=True, blank=True) # UG Projects Guided
+    students_guided = models.PositiveIntegerField(null=True, blank=True) # UG Students Guided
 
     # Contribution/Participation in Students Extra & Co-Curricular activities
     students_extra_curricular = models.TextField(blank=True)

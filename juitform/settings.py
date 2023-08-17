@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'selfappraisal'
+    'widget_tweaks',
+    'selfappraisal',
 ]
 
 MIDDLEWARE = [

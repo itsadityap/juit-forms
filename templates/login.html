@@ -10,18 +10,20 @@
           <div class="card">
             <div class="card-body">
               <!-- Logo -->
+              <br>
               <div class="app-brand justify-content-center">
                 <a href="index.html" class="app-brand-link gap-2">
-                  <span class="app-brand-text demo text-body fw-bolder">Jarvis</span>
+                  {% comment %} <span class="app-brand-text demo text-body fw-bolder mb-2">Juit Forms</span> {% endcomment %}
+                  <h4 class="mb-2">Juit Forms</h4>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Central Monitoring System ⚙️</h4>
+              
 
               <form id="formAuthentication" class="mb-3" action="" method="POST">
                   {% csrf_token %}
                 <div class="mb-3">
-                  <label for="email" class="form-label">username</label>
+                  <label for="email" class="form-label">Employee Code</label>
                   <input
                     type="text"
                     class="form-control"
@@ -32,7 +34,7 @@
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
+                    <label class="form-label" for="password">Password/Pin</label>
 
                   </div>
                   <div class="input-group input-group-merge">

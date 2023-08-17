@@ -10,7 +10,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="{% url 'mainlogger:dashboard' %}" class="app-brand-link">
+            {% comment %} <a href="{% url 'mainlogger:dashboard' %}" class="app-brand-link"> {% endcomment %}
               <img src="{% static 'img/logo.png' %}" width="50px"/>
               <span class="app-brand-text demo menu-text fw-bolder ms-3">Mac</span>
             </a>
@@ -21,13 +21,13 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item {% if nbar == 'dashboard' %}active{% endif %}">
-              <a href="{% url 'mainlogger:dashboard' %}" class="menu-link">
+              {% comment %} <a href="{% url 'mainlogger:dashboard' %}" class="menu-link"> {% endcomment %}
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div >Dashboard</div>
               </a>
             </li>
           <li class="menu-item {% if nbar == 'dashboard-system' %}active{% endif %}">
-              <a href="{% url 'mainlogger:dashboard-for-system' %}" class="menu-link">
+              {% comment %} <a href="{% url 'mainlogger:dashboard-for-system' %}" class="menu-link"> {% endcomment %}
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div >Dashboard System</div>
               </a>
@@ -47,12 +47,12 @@
 
               <ul class="menu-sub">
                 <li class="menu-item {% if nbar_sub == 'machine-list' %}active{% endif %}">
-                  <a href="{% url 'mainlogger:list-machine' %}" class="menu-link">
+                  {% comment %} <a href="{% url 'mainlogger:list-machine' %}" class="menu-link"> {% endcomment %}
                     <div data-i18n="Without menu">All Machines</div>
                   </a>
                 </li>
                 <li class="menu-item {% if nbar_sub == 'machine-create' %}active{% endif %}">
-                  <a href="{% url 'mainlogger:create-machine' %}" class="menu-link">
+                  {% comment %} <a href="{% url 'mainlogger:create-machine' %}" class="menu-link"> {% endcomment %}
                     <div data-i18n="Without menu">Create Machine</div>
                   </a>
                 </li>
@@ -109,7 +109,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{% url 'logout' %}">
+                      <a class="dropdown-item" href="">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>

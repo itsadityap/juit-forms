@@ -1,0 +1,23 @@
+{% extends "base_with_nav.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+
+              <div class="col-md-12">
+                <div class="card mb-4">
+
+                      {% block form_area %}
+
+                      {% endblock form_area %}
+
+                </div>
+              </div>
+
+                </div>
+    </div>
+
+{% endblock content %}

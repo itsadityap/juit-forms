@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import CreateView
-from selfappraisal.form import SelfAppraisalFormModelForm
-from selfappraisal.models import SelfAppraisalForm
+from selfappraisal.form import SelfAppraisalFormModelForm, EventModelForm
+from selfappraisal.models import SelfAppraisalForm, Event
 from django.urls import reverse_lazy
 
 # Create your views here.
@@ -22,8 +22,16 @@ class SelfAppraisalFormCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.name = self.request.user
-        
-
-
         return super().form_valid(form)
     
+
+class EventFormCreateView(CreateView):
+    model = Event
+    form_class = EventModelForm
+    template_name = 'selfappraisal/form/event_form.html'
+    success_url = reverse_lazy("home")
+    success_message = "Event added successfully"
+
+    def form_valid(self, form):
+        form.instance.form = SelfAppraisalForm.objects.get(name=self.request.user)
+        return super().form_valid(form)

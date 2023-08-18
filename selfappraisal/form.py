@@ -1,5 +1,5 @@
 from django import forms
-from selfappraisal.models import SelfAppraisalForm
+from selfappraisal.models import SelfAppraisalForm, Event
 
 class SelfAppraisalFormModelForm(forms.ModelForm):
     class Meta:
@@ -12,3 +12,8 @@ class SelfAppraisalFormModelForm(forms.ModelForm):
     #     super().__init__(*args, **kwargs)
 
     #     self.fields['title'].widget.attrs['class'] = 'form-control'
+
+class EventModelForm(forms.ModelForm):
+    class Meta:
+        model  = Event
+        exclude = ['form']

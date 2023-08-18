@@ -17,7 +17,7 @@
             <form method="POST" action="{% url 'createform' %}">
                 {% csrf_token %}
             <div class="card-header d-flex justify-content-between align-items-center">
-              <h5 class="mb-0">Basic Info</h5>
+              <h4 class="mb-0">Basic Info</h4>
               <small class="text-muted float-end">"USE THIS"</small>
             </div>
             <div class="card-body">
@@ -30,66 +30,24 @@
                             ><i class="bx bx-buildings"></i
                             ></span>
                             {% render_field form.department|add_class:"form-control"|attr:"placeholder:Your Department" %}
-
-                            {% comment %} {{ |add_class:"" }} {% endcomment %}
-
-                            {% comment %} {{ form.department }} {% endcomment %}
-                            {% comment %} {% if form.errors %}
-                                <div class="error-text">
-                                    <p>Form has errors:</p>
-                                    <ul>
-                                        {% for field in form %}
-                                            {% if field.errors %}
-                                                <li>{{ field.name }}: {{ field.errors }}</li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            {% endif %} {% endcomment %}
-                            {% comment %} <input
-                            {% comment %} <input
-                            type="text"
-                            
-                            name="department"
-                            class="form-control"
-                            placeholder="ACME Inc."
-                            aria-label="ACME Inc."
-                            aria-describedby="basic-icon-default-company2"
-                            /> {% endcomment %}
                         </div>
                     </div>
                 </div>
 
                 <div class="row mb-3">
-
                     <div class="col-6">
                         <label class="form-label" for="basic-icon-default-company">Qualifications:</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            <input
-                            type="text"
-                            
-                            name="qualifications"
-                            class="form-control"
-                            placeholder="ACME Inc."
-                            aria-label="ACME Inc."
-                            aria-describedby="basic-icon-default-company2"
-                            />
+                            {% render_field form.qualifications|add_class:"form-control"|attr:"placeholder:Qualifications" %}
                         </div>
                     </div>
                     <div class="col-3">
                         <label class="form-label" for="basic-icon-default-company">Present designation:</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            <input
-                            type="text"
-                            
-                            name="present_designation"
-                            class="form-control"
-                            placeholder="ACME Inc."
-                            aria-label="ACME Inc."
-                            aria-describedby="basic-icon-default-company2"
-                            />
+                            {% render_field form.present_designation|add_class:"form-control"|attr:"placeholder:Present Designation" %}
+
                         </div>
                     </div>
 
@@ -97,13 +55,7 @@
                         <label class="form-label" for="basic-icon-default-company">Date of joining:</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            <input
-                                type="date"
-                                name="date_of_joining"
-                                
-                                class="form-control"
-                                placeholder="06-06-2021"
-                            />
+                            {% render_field form.date_of_joining|add_class:"form-control"|attr:"placeholder:06-06-2021" %}
                         </div>
                     </div>
                 </div>
@@ -113,13 +65,7 @@
                         <label class="form-label" for="basic-icon-default-company">First Designation:</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            <input
-                                type="text"
-                                name="first_designation"
-                                
-                                class="form-control"
-                                placeholder="06-06-2021"
-                            />
+                            {% render_field form.first_designation|add_class:"form-control"|attr:"placeholder:First Designation" %}
                         </div>
                     </div>
 
@@ -127,13 +73,7 @@
                         <label class="form-label" for="basic-icon-default-company">Present pay scale and Pay:</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            <input
-                                type="text"
-                                name="present_pay_scale_and_pay"
-                                
-                                class="form-control"
-                                placeholder="06-06-2021"
-                            />
+                            {% render_field form.present_pay_scale_and_pay|add_class:"form-control"|attr:"placeholder:Present pay scale and Pay" %}
                         </div>
                     </div>
                 </div>
@@ -143,7 +83,7 @@
                         <label class="form-label" for="basic-icon-default-company">Areas of Specialization and Current Interest:</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            <textarea class="form-control" name="areas_of_specialization" placeholder="06-06-2021" rows="3"></textarea>
+                            {% render_field form.areas_of_specialization|add_class:"form-control"|attr:"placeholder:Areas of Specialization and Current Interest" %}
                         </div>
                     </div>
 
@@ -151,7 +91,7 @@
                         <label class="form-label" for="basic-icon-default-company">Additional Qualification acquired during the year (Give full details):</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            <textarea class="form-control" name="additional_qualifications" placeholder="06-06-2021" rows="3"></textarea>
+                            {% render_field form.additional_qualifications|add_class:"form-control"|attr:"placeholder:Additional Qualification acquired during the year" %}
                         </div>
                     </div>
                 </div>
@@ -161,7 +101,7 @@
                         <label class="form-label" for="basic-icon-default-company">Pursuing higher studies:</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            <textarea class="form-control" name="pursuing_higher_studies" placeholder="06-06-2021" rows="3"></textarea>
+                            {% render_field form.pursuing_higher_studies|add_class:"form-control"|attr:"placeholder:Pursuing higher studies" %}
                         </div>
                     </div>
                 </div>
@@ -169,8 +109,7 @@
             </div>
 
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Teaching, Learning and Evaluation Activities</h5>
-                <small class="text-muted float-end">"USE THIS"</small>
+                <h4 class="mb-0">Teaching, Learning and Evaluation Activities</h4>        
             </div>
 
             <div class="card-body">
@@ -180,7 +119,7 @@
                             <label class="form-label" for="basic-icon-default-company">Learning methodology:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="learning_methodology" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.learning_methodology|add_class:"form-control"|attr:"placeholder:Learning methodology" %}
                             </div>
                         </div>
 
@@ -188,7 +127,7 @@
                             <label class="form-label" for="basic-icon-default-company">Modifications in teaching:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="modifications_in_teaching" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.modifications_in_teaching|add_class:"form-control"|attr:"placeholder:Modifications in teaching" %}
                             </div>
                         </div>
                     </div>
@@ -198,16 +137,15 @@
                             <label class="form-label" for="basic-icon-default-company">Beyond syllabus:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="beyond_syllabus" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.beyond_syllabus|add_class:"form-control"|attr:"placeholder:Beyond syllabus" %}
                             </div>
                         </div>
                     </div>                
-              
+            
             </div>
 
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Teaching, Learning and Evaluation Activities</h5>
-                <small class="text-muted float-end">"USE THIS"</small>
+                <h4 class="mb-0">Projects Guided, Contribution/Participation and Lectures Delivered</h4>
             </div>
 
             <div class="card-body">
@@ -217,7 +155,7 @@
                             <label class="form-label" for="basic-icon-default-company">Projects guided:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <input type="number" min="0" class="form-control" name="projects_guided" placeholder="06-06-2021">
+                                {% render_field form.projects_guided|add_class:"form-control"|attr:"placeholder:Projects guided" %}
                             </div>
                         </div>
 
@@ -225,7 +163,7 @@
                             <label class="form-label" for="basic-icon-default-company">Students guided:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <input type="number" min="0" class="form-control" name="students_guided" placeholder="06-06-2021">
+                                {% render_field form.students_guided|add_class:"form-control"|attr:"placeholder:Students guided" %}
                             </div>
                         </div>
                     </div>
@@ -235,14 +173,14 @@
                             <label class="form-label" for="basic-icon-default-company">Students extra curricular:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="students_extra_curricular" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.students_extra_curricular|add_class:"form-control"|attr:"placeholder:Students extra curricular" %}
                             </div>
                         </div>
                         <div class="col-6">
                             <label class="form-label" for="basic-icon-default-company">Departmental activities:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="departmental_activities" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.departmental_activities|add_class:"form-control"|attr:"placeholder:Departmental activities" %}
                             </div>
                         </div>
                     </div>
@@ -251,14 +189,14 @@
                             <label class="form-label" for="basic-icon-default-company">Institute activities:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="institute_activities" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.institute_activities|add_class:"form-control"|attr:"placeholder:Institute activities" %}
                             </div>
                         </div>
                         <div class="col-6">
                             <label class="form-label" for="basic-icon-default-company">Invited lectures:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="invited_lectures" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.invited_lectures|add_class:"form-control"|attr:"placeholder:Invited lectures" %}
                             </div>
                         </div>
                     </div>
@@ -268,14 +206,14 @@
                             <label class="form-label" for="basic-icon-default-company">Member of professional bodies:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="member_of_professional_bodies" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.member_of_professional_bodies|add_class:"form-control"|attr:"placeholder:Invited lectures" %}
                             </div>
                         </div>
                         <div class="col-6">
                             <label class="form-label" for="basic-icon-default-company">Any other information:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="any_other_information" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.any_other_information|add_class:"form-control"|attr:"placeholder:Invited lectures" %}
                             </div>
                         </div>
                     </div>
@@ -285,14 +223,14 @@
                             <label class="form-label" for="basic-icon-default-company">List of enclosures:</label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                <textarea class="form-control" name="list_of_enclosures" placeholder="06-06-2021" rows="3"></textarea>
+                                {% render_field form.list_of_enclosures|add_class:"form-control"|attr:"placeholder:List of enclosures" %}
                             </div>
                         </div>
                     </div>
                 
 
                     <div class="row justify-content-end">
-                        <button type="submit" class="btn btn-primary col-2" id="formsubmit">Submit</button>
+                        <button type="submit" class="btn btn-primary col-2" id="formsubmit">Save and Next</button>
                     </div>
                 
                 

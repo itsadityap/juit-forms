@@ -184,6 +184,12 @@ class EvaluationDuties(models.Model):
 
 
 class Publication(models.Model):
+    publication_choices = [
+        (1, 'Research Papers Published/ Presented'),
+        (2, 'Books, Chapters in Books Written'),
+    ]
+
+    publication_choice = models.PositiveSmallIntegerField(choices=publication_choices)
     form = models.ForeignKey(SelfAppraisalForm, on_delete=models.CASCADE)
 
     author_names = models.TextField(verbose_name="Names of All Authors in Order as in Publication")
@@ -200,17 +206,17 @@ class ResearchProject(models.Model):
 
     form = models.ForeignKey(SelfAppraisalForm, on_delete=models.CASCADE)
 
-    title = models.CharField(max_length=200, verbose_name="Title of Research Project/Consultancy Work")
-    sponsoring_agency = models.TextField(verbose_name="Details of Sponsoring Agency")
-    duration = models.CharField(verbose_name="Duration", max_length=100)
+    title = models.CharField(max_length=200, verbose_name="Title of Research Project/Consultancy Work",null=True, blank=True)
+    sponsoring_agency = models.TextField(verbose_name="Details of Sponsoring Agency",null=True, blank=True)
+    duration = models.CharField(verbose_name="Duration", max_length=100,null=True, blank=True)
     # Sanction Date & Status
-    sanction_date = models.DateField(verbose_name="Sanction Date")
+    sanction_date = models.DateField(verbose_name="Sanction Date",null=True, blank=True)
 
     # TODO: MAKE THIS BOOLEEN FIELD
-    status = models.CharField(max_length=100, verbose_name="Status")
+    status = models.CharField(max_length=100, verbose_name="Status",null=True, blank=True)
 
-    amount_sanctioned = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount Sanctioned")
-    chief_investigator = models.CharField(max_length=100, verbose_name="Chief or Co Investigator Specify")
+    amount_sanctioned = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount Sanctioned",null=True, blank=True)
+    chief_investigator = models.CharField(max_length=100, verbose_name="Chief or Co Investigator Specify",null=True, blank=True)
     
     
     api_score = models.PositiveIntegerField(blank=True, null=True, verbose_name="Self Assessed API Score")

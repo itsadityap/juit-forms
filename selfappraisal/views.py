@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView
-from selfappraisal.form import SelfAppraisalEndFormMain,SelfAppraisalFormModelFormMain,SelfAppraisalActivitiesFormMain, EventModelForm, CourseModelForm, KnowledgeResourcesModelForm, SelfAppraisalKnowledgeModelFormMain, SelfAppraisalKnowledgeModelFormMain
-from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources
+from selfappraisal.form import SelfAppraisalEndFormMain,SelfAppraisalFormModelFormMain,SelfAppraisalActivitiesFormMain, EventModelForm, CourseModelForm, KnowledgeResourcesModelForm, SelfAppraisalKnowledgeModelFormMain, SelfAppraisalKnowledgeModelFormMain, ResearchProjectModelForm, PublicationModelForm, ResearchGuidanceModelForm
+from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources, ResearchProject, Publication, ResearchGuidance
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponseRedirect
@@ -163,6 +163,51 @@ def delete_event_view(request, pk, event_id):
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
     return HttpResponseRedirect(formdashboard_url)
 
+class ResearchProjectCreateView(CreateView):
+    model = ResearchProject
+    form_class = ResearchProjectModelForm
+    template_name = 'selfappraisal/form/create_research_projects.html'
+    success_message = "Hello" # TODO: ADD
+
+    def form_valid(self, form):
+        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+    
+
+class PublicationCreateView(CreateView):
+    model = Publication
+    form_class = PublicationModelForm
+    template_name = 'selfappraisal/form/create_books_publications.html'
+    success_message = "Hello" # TODO: ADD
+
+    def form_valid(self, form):
+        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
+
+class ResearchGuidanceCreateView(CreateView):
+    model = ResearchGuidance
+    form_class = ResearchGuidanceModelForm
+    template_name = 'selfappraisal/form/create_research_guidance.html'
+    success_message = "Hello" # TODO: ADD
+
+    def form_valid(self, form):
+        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
+
 def form_dashboard_view(request, pk):
     mainform_obj = SelfAppraisalForm.objects.get(pk=pk)
     events = Event.objects.filter(form=mainform_obj)
@@ -171,13 +216,20 @@ def form_dashboard_view(request, pk):
 
     knowledge_resources = KnowledgeResources.objects.filter(form=mainform_obj)
     # create fo
+    research_projects = ResearchProject.objects.filter(form=mainform_obj)
+    publications_papers = Publication.objects.filter(form=mainform_obj, publication_choice=1)
+    publications_books = Publication.objects.filter(form=mainform_obj, publication_choice=2)
+    research_guidances = ResearchGuidance.objects.filter(form=mainform_obj)
     return render(request, 'selfappraisal/form/form_dashboard.html', 
-                  {
+                    {
                         'form': mainform_obj, 
                         'events': events, 
                         'oddsemcourses': oddsemcourses, 
                         'evensemcourses': evensemcourses,
-                        'knowledge_resources': knowledge_resources
-                   }
-                  )
-
+                        'knowledge_resources': knowledge_resources,
+                        'research_projects': research_projects,
+                        'publication_papers': publications_papers,
+                        'publication_books': publications_books,
+                        'research_guidances': research_guidances,
+                    }
+                )

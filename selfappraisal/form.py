@@ -1,5 +1,5 @@
 from django import forms
-from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources
+from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources, ResearchProject, Publication, ResearchGuidance
 
 class SelfAppraisalFormModelFormMain(forms.ModelForm):
     class Meta:
@@ -72,4 +72,19 @@ class CourseModelForm(forms.ModelForm):
 class KnowledgeResourcesModelForm(forms.ModelForm):
     class Meta:
         model  = KnowledgeResources
+        exclude = ['form']
+
+class ResearchProjectModelForm(forms.ModelForm):
+    class Meta:
+        model  = ResearchProject
+        exclude = ['form']
+
+class PublicationModelForm(forms.ModelForm):
+    class Meta:
+        model  = Publication
+        exclude = ['form']
+
+class ResearchGuidanceModelForm(forms.ModelForm):
+    class Meta:
+        model  = ResearchGuidance
         exclude = ['form']

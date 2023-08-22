@@ -1,0 +1,63 @@
+{% extends "base_with_nav.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">Add Research Guidance</h4>
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">Create Research Guidance</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.enrollment_number.id_for_label }}">{{ form.enrollment_number.label }}</label>
+                                {% render_field form.enrollment_number|add_class:"form-control"|attr:"placeholder:Enrollment Number" %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.name_of_student.id_for_label }}">{{ form.name_of_student.label }}</label>
+                                {% render_field form.name_of_student|add_class:"form-control"|attr:"placeholder:Name of the Student" %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.title_of_thesis.id_for_label }}">{{ form.title_of_thesis.label }}</label>
+                                {% render_field form.title_of_thesis|add_class:"form-control"|attr:"placeholder:Title of Thesis/Dissertation/Project" %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.names_of_joint_supervisors.id_for_label }}">{{ form.names_of_joint_supervisors.label }}</label>
+                                {% render_field form.names_of_joint_supervisors|add_class:"form-control"|attr:"placeholder:Names of Joint Supervisors" %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.level.id_for_label }}">{{ form.level.label }}</label>
+                                {% render_field form.level|add_class:"form-control"|attr:"placeholder:Level" %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.status.id_for_label }}">{{ form.status.label }}</label>
+                                {% render_field form.status|add_class:"form-control"|attr:"placeholder:Status" %}
+                            </div>
+                            
+                            <div class="row justify-content-end">
+                                <button type="submit" class="btn btn-primary col-2" id="formsubmit">Create Research Guidance</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

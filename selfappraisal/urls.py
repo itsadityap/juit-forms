@@ -23,4 +23,13 @@ urlpatterns = [
 
     # Knowledge Resources CRUD
     path('form/<int:pk>/knowledge-resources/create/', views.KnowledgeResourcesCreateView.as_view(), name="create-knowledge-resources"),
+
+    # Research Project CRUD
+    path('form/<int:pk>/research-project/create/', views.ResearchProjectCreateView.as_view(), name="create-research-project"),
+
+    # Publication CRUD
+    path('form/<int:pk>/publication/create/', views.PublicationCreateView.as_view(), name="create-publication"),
+
+    # Research Guidance CRUD
+    path('form/<int:pk>/research-guidance/create/', views.ResearchGuidanceCreateView.as_view(), name="create-research-guidance"),
 ]

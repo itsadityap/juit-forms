@@ -1,0 +1,68 @@
+{% extends "base_with_nav.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">Add Research Project</h4>
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">Create Research Project</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+                                {% render_field form.title|add_class:"form-control"|attr:"placeholder:Title of Research Project" %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.sponsoring_agency.id_for_label }}">{{ form.sponsoring_agency.label }}</label>
+                                {% render_field form.sponsoring_agency|add_class:"form-control"|attr:"placeholder:Details of Sponsoring Agency"|attr:"rows:3" %}
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="{{ form.duration.id_for_label }}">{{ form.duration.label }}</label>
+                                    {% render_field form.duration|add_class:"form-control"|attr:"placeholder:Duration" %}
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="{{ form.sanction_date.id_for_label }}">{{ form.sanction_date.label }}</label>
+                                    {% render_field form.sanction_date|add_class:"form-control"|attr:"placeholder:YYYY-MM-DD" %}
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.status.id_for_label }}">{{ form.status.label }}</label>
+                                {% render_field form.status|add_class:"form-control"|attr:"placeholder:Status" %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.amount_sanctioned.id_for_label }}">{{ form.amount_sanctioned.label }}</label>
+                                {% render_field form.amount_sanctioned|add_class:"form-control"|attr:"placeholder:Amount Sanctioned" %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.chief_investigator.id_for_label }}">{{ form.chief_investigator.label }}</label>
+                                {% render_field form.chief_investigator|add_class:"form-control"|attr:"placeholder:Chief or Co Investigator Specify" %}
+                            </div>
+                            <div class="row justify-content-end">
+                                <button type="submit" class="btn btn-primary col-2" id="formsubmit">Create Research Project</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -398,8 +398,8 @@
                             14. Research Papers Published/ Presented:
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{% url 'createevent' form.id %}" class="btn btn-primary">
-                                <i class="bx bx-plus"></i> Add Event
+                            <a href="{% url 'create-publication' form.id %}" class="btn btn-primary">
+                                <i class="bx bx-plus"></i> Add Research Papers
                             </a>
                         </div>
                     </div>
@@ -409,38 +409,30 @@
                     <table class="table">
                         <thead>
                             <tr>
-                            <th>Title</th>
-                            <th>Sponsoring Agency</th>
-                            <th>Organization</th>
-                            <th>Place Held</th>
-                            <th>Attended/Organized</th>
+                            <th>Author Names</th>
+                            <th>Title Reference</th>
+                            <th>Publication Type</th>
                             <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            {% if events  %}
-                                {% for event in events %}
+                            {% if publication_papers  %}
+                                {% for publication in publication_papers %}
                                     <tr>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{event.title}}</strong></td>
-                                        <td>{{event.sponsoring_agency}}</td>
-                                        <td>{{event.organization}}</td>
-                                        <td>{{event.place_held}}</td>
-                                        <td>
-                                            <span class="badge bg-label-{% if event.attended_organized == "Organized" %}primary{% else %}info{% endif %} me-1">
-                                                {{event.attended_organized}}
-                                            </span>    
-                                        </td>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{publication.author_names}}</strong></td>
+                                        <td>{{publication.title_reference}}</td>
+                                        <td>{{publication.publication_type}}</td>
                                         <td>
                                             <div class="row"> 
-                                                <a class="col-2 " href="{% url 'update-event' form.id event.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
-                                                <a class="col-2" href="{% url 'delete-event' form.id event.id %}"><i class="bx bx-trash me-1"></i></a>
+                                                <a class="col-2 " href=""><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2" href=""><i class="bx bx-trash me-1"></i></a>
                                             </div>  
                                         </td>
                                     </tr>
                                 {% endfor %}
                             {% else %}
                             <tr>
-                                <td colspan="6" class="text-center">No Events Found</td>
+                                <td colspan="6" class="text-center">No Books or Chapters</td>
                             </tr>
                             {% endif %}
                         </tbody>
@@ -455,8 +447,8 @@
                             15. Books, Chapters in Books Written:
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{% url 'createevent' form.id %}" class="btn btn-primary">
-                                <i class="bx bx-plus"></i> Add Event
+                            <a href="{% url 'create-publication' form.id %}" class="btn btn-primary">
+                                <i class="bx bx-plus"></i> Add Publications
                             </a>
                         </div>
                     </div>
@@ -466,38 +458,30 @@
                     <table class="table">
                         <thead>
                             <tr>
-                            <th>Title</th>
-                            <th>Sponsoring Agency</th>
-                            <th>Organization</th>
-                            <th>Place Held</th>
-                            <th>Attended/Organized</th>
+                            <th>Author Names</th>
+                            <th>Title Reference</th>
+                            <th>Publication Type</th>
                             <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            {% if events  %}
-                                {% for event in events %}
+                            {% if publication_books  %}
+                                {% for publication in publication_books %}
                                     <tr>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{event.title}}</strong></td>
-                                        <td>{{event.sponsoring_agency}}</td>
-                                        <td>{{event.organization}}</td>
-                                        <td>{{event.place_held}}</td>
-                                        <td>
-                                            <span class="badge bg-label-{% if event.attended_organized == "Organized" %}primary{% else %}info{% endif %} me-1">
-                                                {{event.attended_organized}}
-                                            </span>    
-                                        </td>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{publication.author_names}}</strong></td>
+                                        <td>{{publication.title_reference}}</td>
+                                        <td>{{publication.publication_type}}</td>
                                         <td>
                                             <div class="row"> 
-                                                <a class="col-2 " href="{% url 'update-event' form.id event.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
-                                                <a class="col-2" href="{% url 'delete-event' form.id event.id %}"><i class="bx bx-trash me-1"></i></a>
+                                                <a class="col-2 " href=""><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2" href=""><i class="bx bx-trash me-1"></i></a>
                                             </div>  
                                         </td>
                                     </tr>
                                 {% endfor %}
                             {% else %}
                             <tr>
-                                <td colspan="6" class="text-center">No Events Found</td>
+                                <td colspan="6" class="text-center">No Books or Chapters</td>
                             </tr>
                             {% endif %}
                         </tbody>
@@ -512,49 +496,45 @@
                             16. Research Projects and Consultancy Works:
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{% url 'createevent' form.id %}" class="btn btn-primary">
-                                <i class="bx bx-plus"></i> Add Event
+                            <a href="{% url 'create-research-project' form.id %}" class="btn btn-primary">
+                                <i class="bx bx-plus"></i> Add Research Projects
                             </a>
                         </div>
                     </div>
                 </h5>
                 
-                <div class="table-responsive text-nowrap">
+                   <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead>
                             <tr>
                             <th>Title</th>
-                            <th>Sponsoring Agency</th>
-                            <th>Organization</th>
-                            <th>Place Held</th>
-                            <th>Attended/Organized</th>
+                            <th>Sanction Date</th>
+                            <th>Status</th>
+                            <th>Amount Sanctioned</th>
+                            <th>Chief Investigator</th>
                             <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            {% if events  %}
-                                {% for event in events %}
+                            {% if research_projects  %}
+                                {% for research_project in research_projects %}
                                     <tr>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{event.title}}</strong></td>
-                                        <td>{{event.sponsoring_agency}}</td>
-                                        <td>{{event.organization}}</td>
-                                        <td>{{event.place_held}}</td>
-                                        <td>
-                                            <span class="badge bg-label-{% if event.attended_organized == "Organized" %}primary{% else %}info{% endif %} me-1">
-                                                {{event.attended_organized}}
-                                            </span>    
-                                        </td>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{research_project.title}}</strong></td>
+                                        <td>{{research_project.sanction_date}}</td>
+                                        <td>{{research_project.status}}</td>
+                                        <td>{{research_project.amount_sanctioned}}</td>  
+                                        <td>{{research_project.chief_investigator}}</td>
                                         <td>
                                             <div class="row"> 
-                                                <a class="col-2 " href="{% url 'update-event' form.id event.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
-                                                <a class="col-2" href="{% url 'delete-event' form.id event.id %}"><i class="bx bx-trash me-1"></i></a>
+                                                <a class="col-2 " href=""><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2" href=""><i class="bx bx-trash me-1"></i></a>
                                             </div>  
                                         </td>
                                     </tr>
                                 {% endfor %}
                             {% else %}
                             <tr>
-                                <td colspan="6" class="text-center">No Events Found</td>
+                                <td colspan="6" class="text-center">No Research Projects and Consultancy Works:</td>
                             </tr>
                             {% endif %}
                         </tbody>
@@ -569,7 +549,7 @@
                             17. Research Guidance: 
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{% url 'createevent' form.id %}" class="btn btn-primary">
+                            <a href="{% url 'create-research-guidance' form.id %}" class="btn btn-primary">
                                 <i class="bx bx-plus"></i> Add Event
                             </a>
                         </div>
@@ -589,13 +569,15 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            {% if events  %}
-                                {% for event in events %}
+                            {% if research_guidances  %}
+                                {% for research_guidance in research_guidances %}
                                     <tr>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{event.title}}</strong></td>
-                                        <td>{{event.sponsoring_agency}}</td>
-                                        <td>{{event.organization}}</td>
-                                        <td>{{event.place_held}}</td>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{research_guidance.enrollment_number}}</strong></td>
+                                        <td>{{research_guidance.name_of_student}}</td>
+                                        <td>{{research_guidance.title_of_thesis}}</td>
+                                        <td>{{research_guidance.names_of_joint_supervisors}}</td>
+                                        <td>{{research_guidance.level}}</td>
+                                        <td>{{research_guidance.status}}</td>
                                         <td>
                                             <span class="badge bg-label-{% if event.attended_organized == "Organized" %}primary{% else %}info{% endif %} me-1">
                                                 {{event.attended_organized}}
@@ -603,8 +585,8 @@
                                         </td>
                                         <td>
                                             <div class="row"> 
-                                                <a class="col-2 " href="{% url 'update-event' form.id event.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
-                                                <a class="col-2" href="{% url 'delete-event' form.id event.id %}"><i class="bx bx-trash me-1"></i></a>
+                                                <a class="col-2 " href=""><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2" href=""><i class="bx bx-trash me-1"></i></a>
                                             </div>  
                                         </td>
                                     </tr>

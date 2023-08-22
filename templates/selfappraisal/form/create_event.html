@@ -14,7 +14,7 @@
         <div class="col-xl">
           <div class="card mb-4">
 
-            <form method="POST" action="{% url 'createform' %}">
+            <form method="POST" >
                 {% csrf_token %}
             <div class="card-header d-flex justify-content-between align-items-center">
               <h4 class="mb-0">Add Event</h4>
@@ -23,9 +23,9 @@
             <div class="card-body">
                 <div class="row mb-3"> 
                     <div class="col-6">
-                        <label class="form-label" for="{{ form.department.id_for_label }}">Title</label>
+                        <label class="form-label" for="{{form.title.id_for_label}}">{{form.title.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"
+                            <span id="{{form.title.id_for_label}}" class="input-group-text"
                             ><i class="bx bx-buildings"></i
                             ></span>
                             {% render_field form.title|add_class:"form-control"|attr:"placeholder:Title" %}
@@ -35,25 +35,25 @@
 
                 <div class="row mb-3">
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-company">Start Date:</label>
+                        <label class="form-label" for="{{form.start_date.id_for_label}}">{{form.start_date.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.start_date.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.start_date|add_class:"form-control"|attr:"placeholder:Start Date" %}
                         </div>
                     </div>
                     <div class="col-3">
-                        <label class="form-label" for="basic-icon-default-company">End Date:</label>
+                        <label class="form-label" for="{{form.end_date.id_for_label}}">{{form.end_date.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.end_date.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.end_date|add_class:"form-control"|attr:"placeholder:End Date" %}
 
                         </div>
                     </div>
 
                     <div class="col-3">
-                        <label class="form-label" for="basic-icon-default-company">Sponsoring Agency:</label>
+                        <label class="form-label" for="{{form.sponsoring_agency.id_for_label}}">{{form.sponsoring_agency.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.sponsoring_agency.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.sponsoring_agency|add_class:"form-control"|attr:"placeholder:Sponsoring Agency" %}
                         </div>
                     </div>
@@ -61,24 +61,24 @@
 
                 <div class="row mb-3"> 
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-company">Organization:</label>
+                        <label class="form-label" for="{{form.organization.id_for_label}}">{{form.organization.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.organization.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.organization|add_class:"form-control"|attr:"placeholder:Organization" %}
                         </div>
                     </div>
 
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-company">Attended organized</label>
+                        <label class="form-label" for="{{form.attended_organized.id_for_label}}">{{form.attended_organized.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.attended_organized.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.attended_organized|add_class:"form-control"|attr:"placeholder:Attended organized" %}
                         </div>
                     </div>
 
                     </div>
                     <div class="row justify-content-end">
-                        <button type="submit" class="btn btn-primary col-2" id="formsubmit">Save and Next</button>
+                        <button type="submit" class="btn btn-primary col-2" id="formsubmit">Add Event</button>
                     </div>
                 
                 

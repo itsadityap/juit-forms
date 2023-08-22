@@ -1,17 +1,21 @@
 from django import forms
 from selfappraisal.models import SelfAppraisalForm, Event
 
-class SelfAppraisalFormModelForm(forms.ModelForm):
+class SelfAppraisalFormModelFormMain(forms.ModelForm):
     class Meta:
         model = SelfAppraisalForm
 
-        exclude = ['name', 'self_approval', 'hod_approval', 'hod_remarks', 'dean_approval', 'dean_remarks', 'vc_approval', 'vc_remarks']
-        # widgets = {'department': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Department'})}
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-
-    #     self.fields['title'].widget.attrs['class'] = 'form-control'
+        fields = [
+            'department',
+            'qualifications',
+            'present_designation',
+            'date_of_joining',
+            'first_designation',
+            'present_pay_scale_and_pay',
+            'areas_of_specialization',
+            'additional_qualifications',
+            'pursuing_higher_studies',
+        ]
 
 class EventModelForm(forms.ModelForm):
     class Meta:

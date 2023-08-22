@@ -27,23 +27,23 @@ class CustomUser(AbstractUser):
 class SelfAppraisalForm(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # Name
     
-    department = models.CharField(max_length=100)  # Department
+    department = models.CharField(verbose_name="2. Department", max_length=100)  # Department
     
-    qualifications = models.CharField(max_length=100,null=True, blank=True) # Qualifications
+    qualifications = models.CharField(verbose_name="3. Qualifications" ,max_length=100,null=True, blank=True) # Qualifications
 
-    present_designation = models.CharField(max_length=100,null=True, blank=True) # Present Designation
+    present_designation = models.CharField(verbose_name="4. Present Designation",max_length=100,null=True, blank=True) # Present Designation
     
-    date_of_joining = models.DateField(null=True, blank=True) # University Joining Date
+    date_of_joining = models.DateField(verbose_name="5. University Joining Date",null=True, blank=True) # University Joining Date
 
-    first_designation = models.CharField(max_length=100,null=True, blank=True) # First Designation
+    first_designation = models.CharField(verbose_name="6. First Designation",max_length=100,null=True, blank=True) # First Designation
 
-    present_pay_scale_and_pay = models.CharField(max_length=100,null=True, blank=True) # Present Pay Scale & Pay
+    present_pay_scale_and_pay = models.CharField(verbose_name="7. Present Pay Scale & Pay",max_length=100,null=True, blank=True) # Present Pay Scale & Pay
 
-    areas_of_specialization = models.TextField(null=True, blank=True) # Areas of Specialization and Current Interest
+    areas_of_specialization = models.TextField(verbose_name="8. Areas of Specialization and Current Interest",null=True, blank=True) # Areas of Specialization and Current Interest
 
-    additional_qualifications = models.TextField(null=True, blank=True) # Additional Qualification acquired during the year
+    additional_qualifications = models.TextField(verbose_name="9. Additional Qualification acquired during the year (Give full details)",null=True, blank=True) # Additional Qualification acquired during the year
 
-    pursuing_higher_studies = models.TextField(null=True, blank=True) # Pursuing Higher Studies
+    pursuing_higher_studies = models.TextField(verbose_name="10. Pursuing Higher Studies (Give full details)",null=True, blank=True) # Pursuing Higher Studies
 
     learning_methodology = models.TextField(null=True, blank=True) # Participatory/Innovative Teaching Learning Methodologies used (give brief details )
 
@@ -108,23 +108,26 @@ class Event(models.Model):
     ]
 
     form = models.ForeignKey(SelfAppraisalForm, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    title = models.CharField(max_length=200, null=True, blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
 
     # Sponsoring Agency and Organisation & Place held
-    sponsoring_agency = models.CharField(max_length=200)
-    organization = models.CharField(max_length=200)
-    place_held = models.CharField(max_length=200)
+    sponsoring_agency = models.CharField(max_length=200, null=True, blank=True)
+    organization = models.CharField(max_length=200, null=True, blank=True)
+    place_held = models.CharField(max_length=200, null=True, blank=True)
     
-    attended_organized = models.CharField(max_length=10, choices=attended_organized_choices)
-    remarks = models.TextField(blank=True)
+    attended_organized = models.CharField(max_length=10, choices=attended_organized_choices, null=True, blank=True)
+
+    # by HOD
+    remarks = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title
 
 
 class Course(models.Model):
+    # TODO: ADD TYPE (ODD SEM OR EVEN SEM)
     form = models.ForeignKey(SelfAppraisalForm, on_delete=models.CASCADE)
     course_code = models.CharField(max_length=20)
     course_title = models.CharField(max_length=200)

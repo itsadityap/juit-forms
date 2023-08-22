@@ -14,7 +14,7 @@
         <div class="col-xl">
           <div class="card mb-4">
 
-            <form method="POST" action="{% url 'createform' %}">
+            <form method="POST" action="{% url 'createmainform' %}">
                 {% csrf_token %}
             <div class="card-header d-flex justify-content-between align-items-center">
               <h4 class="mb-0">Basic Info</h4>
@@ -24,11 +24,9 @@
               
                 <div class="row mb-3"> 
                     <div class="col-6">
-                        <label class="form-label" for="{{ form.department.id_for_label }}">Department</label>
+                        <label class="form-label" for="{{ form.department.id_for_label }}">{{form.department.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"
-                            ><i class="bx bx-buildings"></i
-                            ></span>
+                            <span id="{{ form.department.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.department|add_class:"form-control"|attr:"placeholder:Your Department" %}
                         </div>
                     </div>
@@ -36,204 +34,90 @@
 
                 <div class="row mb-3">
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-company">Qualifications:</label>
+                        <label class="form-label" for="{{form.qualifications.id_for_label}}">{{form.qualifications.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.qualifications.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.qualifications|add_class:"form-control"|attr:"placeholder:Qualifications" %}
                         </div>
+                        <span>{{form.qualifications.errors}}</span>
                     </div>
                     <div class="col-3">
-                        <label class="form-label" for="basic-icon-default-company">Present designation:</label>
+                        <label class="form-label" for="{{form.present_designation.id_for_label}}">{{form.present_designation.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            {% render_field form.present_designation|add_class:"form-control"|attr:"placeholder:Present Designation" %}
-
+                            <span id="{{form.present_designation.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.present_designation|add_class:"form-control"|attr:"placeholder:Present Designation" %}                            
                         </div>
+                        <span>{{form.present_designation.errors}}</span>
                     </div>
-
                     <div class="col-3">
-                        <label class="form-label" for="basic-icon-default-company">Date of joining:</label>
+                        <label class="form-label" for="{{form.date_of_joining.id_for_label}}">{{form.date_of_joining.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                            {% render_field form.date_of_joining|add_class:"form-control"|attr:"placeholder:06-06-2021" %}
+                            <span id="{{form.date_of_joining.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.date_of_joining|add_class:"form-control"|attr:"placeholder:06-06-2021" %}  
                         </div>
+                        <span>{{form.date_of_joining.errors}}</span>
                     </div>
                 </div>
 
                 <div class="row mb-3"> 
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-company">First Designation:</label>
+                        <label class="form-label" for="{{form.first_designation.id_for_label}}">{{form.first_designation.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.first_designation.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.first_designation|add_class:"form-control"|attr:"placeholder:First Designation" %}
+                            
                         </div>
+                        <span>{{form.first_designation.errors}}</span>
                     </div>
 
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-company">Present pay scale and Pay:</label>
+                        <label class="form-label" for="{{form.present_pay_scale_and_pay.id_for_label}}">{{form.present_pay_scale_and_pay.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.present_pay_scale_and_pay.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.present_pay_scale_and_pay|add_class:"form-control"|attr:"placeholder:Present pay scale and Pay" %}
+                        
                         </div>
+                        <span>{{form.present_pay_scale_and_pay.errors}}</span>
                     </div>
                 </div>
 
                 <div class="row mb-3"> 
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-company">Areas of Specialization and Current Interest:</label>
+                        <label class="form-label" for="{{form.areas_of_specialization.label}}">{{form.areas_of_specialization.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.areas_of_specialization.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.areas_of_specialization|add_class:"form-control"|attr:"placeholder:Areas of Specialization and Current Interest" %}
+                           
                         </div>
+                        <span>{{form.areas_of_specialization.errors}}</span>
                     </div>
 
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-company">Additional Qualification acquired during the year (Give full details):</label>
+                        <label class="form-label" for="{{form.additional_qualifications.id_for_label}}">{{form.additional_qualifications.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.additional_qualifications.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.additional_qualifications|add_class:"form-control"|attr:"placeholder:Additional Qualification acquired during the year" %}
+                            
                         </div>
+                        <span>{{form.additional_qualifications.errors}}</span>
                     </div>
                 </div>
 
                 <div class="row mb-3"> 
                     <div class="col-6">
-                        <label class="form-label" for="basic-icon-default-company">Pursuing higher studies:</label>
+                        <label class="form-label" for="{{form.pursuing_higher_studies.id_for_label}}">{{form.pursuing_higher_studies.label}}</label>
                         <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            <span id="{{form.pursuing_higher_studies.id_for_label}}" class="input-group-text"><i class="bx bx-buildings"></i></span>
                             {% render_field form.pursuing_higher_studies|add_class:"form-control"|attr:"placeholder:Pursuing higher studies" %}
+                            
                         </div>
+                        <span>{{form.pursuing_higher_studies.errors}}</span>
                     </div>
                 </div>
-              
-            </div>
-
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="mb-0">Teaching, Learning and Evaluation Activities</h4>        
-            </div>
-
-            <div class="card-body">
                 
-                    <div class="row mb-3"> 
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Learning methodology:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.learning_methodology|add_class:"form-control"|attr:"placeholder:Learning methodology" %}
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Modifications in teaching:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.modifications_in_teaching|add_class:"form-control"|attr:"placeholder:Modifications in teaching" %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3"> 
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Beyond syllabus:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.beyond_syllabus|add_class:"form-control"|attr:"placeholder:Beyond syllabus" %}
-                            </div>
-                        </div>
-                    </div>                
-            
-            </div>
-
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="mb-0">Projects Guided, Contribution/Participation and Lectures Delivered</h4>
-            </div>
-
-            <div class="card-body">
-                <form>
-                    <div class="row mb-3"> 
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Projects guided:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.projects_guided|add_class:"form-control"|attr:"placeholder:Projects guided" %}
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Students guided:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.students_guided|add_class:"form-control"|attr:"placeholder:Students guided" %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3"> 
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Students extra curricular:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.students_extra_curricular|add_class:"form-control"|attr:"placeholder:Students extra curricular" %}
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Departmental activities:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.departmental_activities|add_class:"form-control"|attr:"placeholder:Departmental activities" %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3"> 
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Institute activities:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.institute_activities|add_class:"form-control"|attr:"placeholder:Institute activities" %}
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Invited lectures:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.invited_lectures|add_class:"form-control"|attr:"placeholder:Invited lectures" %}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row mb-3"> 
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Member of professional bodies:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.member_of_professional_bodies|add_class:"form-control"|attr:"placeholder:Invited lectures" %}
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">Any other information:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.any_other_information|add_class:"form-control"|attr:"placeholder:Invited lectures" %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3"> 
-                        <div class="col-6">
-                            <label class="form-label" for="basic-icon-default-company">List of enclosures:</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                {% render_field form.list_of_enclosures|add_class:"form-control"|attr:"placeholder:List of enclosures" %}
-                            </div>
-                        </div>
-                    </div>
-                
-
-                    <div class="row justify-content-end">
-                        <button type="submit" class="btn btn-primary col-2" id="formsubmit">Save and Next</button>
-                    </div>
-                
-                
+                <div class="row justify-content-end">
+                    <button type="submit" class="btn btn-primary col-2" id="formsubmit">Save and Next</button>
+                </div>
             </div>
         </form>
         </div>

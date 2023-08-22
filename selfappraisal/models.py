@@ -45,11 +45,11 @@ class SelfAppraisalForm(models.Model):
 
     pursuing_higher_studies = models.TextField(verbose_name="10. Pursuing Higher Studies (Give full details)",null=True, blank=True) # Pursuing Higher Studies
 
-    learning_methodology = models.TextField(null=True, blank=True) # Participatory/Innovative Teaching Learning Methodologies used (give brief details )
+    learning_methodology = models.TextField(verbose_name="Participatory/Innovative Teaching Learning Methodologies used (give brief details)",null=True, blank=True)
 
-    modifications_in_teaching = models.TextField(null=True, blank=True) # Any Modification/ Addition to syllabus ( give brief details )
+    modifications_in_teaching = models.TextField(verbose_name="Any Modification/ Addition to syllabus (give brief details)",null=True, blank=True) 
 
-    beyond_syllabus = models.TextField(null=True, blank=True) # Any Coverage/ Introduction beyond syllabus ( give brief details )
+    beyond_syllabus = models.TextField(verbose_name="Any Coverage/ Introduction beyond syllabus ( give brief details )",null=True, blank=True) 
 
     # Number of Projects Guided
 
@@ -128,6 +128,13 @@ class Event(models.Model):
 
 class Course(models.Model):
     # TODO: ADD TYPE (ODD SEM OR EVEN SEM)
+    course_type_choices = [
+        (1, 'ODD SEM'),
+        (2, 'EVEN SEM'),
+    ]
+
+    course_type = models.PositiveSmallIntegerField(choices=course_type_choices, default=1)
+
     form = models.ForeignKey(SelfAppraisalForm, on_delete=models.CASCADE)
     course_code = models.CharField(max_length=20)
     course_title = models.CharField(max_length=200)
@@ -147,8 +154,8 @@ class KnowledgeResources(models.Model):
     resources_consulted = models.TextField()
     resources_prescribed = models.TextField()
     additional_resources_provided = models.TextField()
-    self_assessed_api_score = models.DecimalField(max_digits=5, decimal_places=2)
-    remarks = models.TextField()
+    self_assessed_api_score = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    remarks = models.TextField(blank=True, null=True)
   
     def __str__(self):
         return self.course_code

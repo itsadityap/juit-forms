@@ -1,0 +1,87 @@
+{% extends "base_with_nav.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">Courses</h4>
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">Add Course</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label class="form-label" for="{{ form.course_type.id_for_label }}">{{ form.course_type.label }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-code"></i></span>
+                                        {% render_field form.course_type|add_class:"form-control"|attr:"placeholder:Course Type" %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" for="{{ form.course_code.id_for_label }}">{{ form.course_code.label }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-code"></i></span>
+                                        {% render_field form.course_code|add_class:"form-control"|attr:"placeholder:Course Code" %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" for="{{ form.course_title.id_for_label }}">{{ form.course_title.label }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-book-alt"></i></span>
+                                        {% render_field form.course_title|add_class:"form-control"|attr:"placeholder:Course Title" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label class="form-label" for="{{ form.contact_hours_per_week.id_for_label }}">{{ form.contact_hours_per_week.label }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-time-five"></i></span>
+                                        {% render_field form.contact_hours_per_week|add_class:"form-control"|attr:"placeholder:Contact Hours per Week" %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" for="{{ form.total_hours_scheduled.id_for_label }}">{{ form.total_hours_scheduled.label }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-calendar-event"></i></span>
+                                        {% render_field form.total_hours_scheduled|add_class:"form-control"|attr:"placeholder:Total Hours Scheduled" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label class="form-label" for="{{ form.total_hours_engaged.id_for_label }}">{{ form.total_hours_engaged.label }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-calendar-check"></i></span>
+                                        {% render_field form.total_hours_engaged|add_class:"form-control"|attr:"placeholder:Total Hours Engaged" %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" for="{{ form.self_assessed_api_score.id_for_label }}">{{ form.self_assessed_api_score.label }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-star"></i></span>
+                                        {% render_field form.self_assessed_api_score|add_class:"form-control"|attr:"placeholder:Self-Assessed API Score" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end">
+                                <button type="submit" class="btn btn-primary col-2" id="formsubmit">Add Course</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

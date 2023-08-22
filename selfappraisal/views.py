@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView
-from selfappraisal.form import SelfAppraisalFormModelFormMain, EventModelForm
-from selfappraisal.models import SelfAppraisalForm, Event
+from selfappraisal.form import SelfAppraisalFormModelFormMain, EventModelForm, CourseModelForm, KnowledgeResourcesModelForm, SelfAppraisalKnowledgeModelFormMain, SelfAppraisalKnowledgeModelFormMain
+from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponseRedirect
@@ -37,6 +37,30 @@ class SelfAppraisalFormUpdateView(UpdateView):
 
     def get_success_url(self):
         # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.object.pk})
+    
+class SelfAppraisalKnowledgeExtensionView(UpdateView):
+    model = SelfAppraisalForm
+    form_class = SelfAppraisalKnowledgeModelFormMain
+    template_name = 'selfappraisal/form/create_knowledge_extension.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formdashboard", kwargs={'pk': self.object.pk})
+
+class SelfAppraisalGuidedExtensionView(UpdateView):
+    model = SelfAppraisalForm
+    form_class = SelfAppraisalKnowledgeModelFormMain
+    template_name = 'selfappraisal/form/create_students_guided.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
         return reverse_lazy("formdashboard", kwargs={'pk': self.object.pk})
 
 class EventCreateView(CreateView):
@@ -73,6 +97,39 @@ class EventUpdateView(UpdateView):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
+
+# TODO: MAKE UPDATE DELETE
+class CourseCreateView(CreateView):
+    model = Course
+    form_class = CourseModelForm
+    template_name = 'selfappraisal/form/create_course.html'
+    success_message = "Hello" # TODO: ADD
+
+    def form_valid(self, form):
+        # TODO: ADD PROTECTION
+        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
+
+class KnowledgeResourcesCreateView(CreateView):
+    model = KnowledgeResources
+    form_class = KnowledgeResourcesModelForm
+    template_name = 'selfappraisal/form/create_resource.html'
+    success_message = "Hello" # TODO: ADD
+
+    def form_valid(self, form):
+        # TODO: ADD PROTECTION
+        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
 # TODO: @rishabh fix this 
 def delete_event_view(request, pk, event_id):
     event = get_object_or_404(Event, id=event_id)
@@ -84,5 +141,18 @@ def delete_event_view(request, pk, event_id):
 def form_dashboard_view(request, pk):
     mainform_obj = SelfAppraisalForm.objects.get(pk=pk)
     events = Event.objects.filter(form=mainform_obj)
+    oddsemcourses = Course.objects.filter(form=mainform_obj, course_type=1)
+    evensemcourses = Course.objects.filter(form=mainform_obj, course_type=2)
+
+    knowledge_resources = KnowledgeResources.objects.filter(form=mainform_obj)
     # create fo
-    return render(request, 'selfappraisal/form/form_dashboard.html', {'form': mainform_obj, 'events': events})
+    return render(request, 'selfappraisal/form/form_dashboard.html', 
+                  {
+                        'form': mainform_obj, 
+                        'events': events, 
+                        'oddsemcourses': oddsemcourses, 
+                        'evensemcourses': evensemcourses,
+                        'knowledge_resources': knowledge_resources
+                   }
+                  )
+

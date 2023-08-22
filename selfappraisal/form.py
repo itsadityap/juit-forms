@@ -37,6 +37,28 @@ class SelfAppraisalStudentsGuidedFormMain(forms.ModelForm):
             'beyond_syllabus'
         ]
 
+class SelfAppraisalActivitiesFormMain(forms.ModelForm):
+    class Meta:
+        model = SelfAppraisalForm
+
+        fields = [
+            'students_extra_curricular',
+            'departmental_activities',
+            'institute_activities',
+            'invited_lectures',
+            'articles_monographs',
+        ]
+
+class SelfAppraisalEndFormMain(forms.ModelForm):
+    class Meta:
+        model = SelfAppraisalForm
+
+        fields = [
+            'member_of_professional_bodies',
+            'any_other_information',
+            'list_of_enclosures',
+        ]
+
 class EventModelForm(forms.ModelForm):
     class Meta:
         model  = Event

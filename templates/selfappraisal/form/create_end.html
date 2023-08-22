@@ -1,0 +1,66 @@
+{% extends "base_with_nav.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Appraisal</h4>
+      <!-- Basic Layout -->
+      <div class="row">
+        <div class="col-xl">
+          <div class="card mb-4">
+
+            <form method="POST">
+                {% csrf_token %}
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">13.</h4>
+              <small class="text-muted float-end">"USE THIS"</small>
+            </div>
+            <div class="card-body">
+              
+                <div class="row mb-3"> 
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.member_of_professional_bodies.id_for_label }}">{{form.member_of_professional_bodies.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.member_of_professional_bodies.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.member_of_professional_bodies|add_class:"form-control"|attr:"placeholder:Your member_of_professional_bodies" %}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.any_other_information.id_for_label }}">{{form.any_other_information.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.any_other_information.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.any_other_information|add_class:"form-control"|attr:"placeholder:Your any_other_information" %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3"> 
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.list_of_enclosures.id_for_label }}">{{form.list_of_enclosures.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.list_of_enclosures.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.list_of_enclosures|add_class:"form-control"|attr:"placeholder:Your list_of_enclosures" %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row justify-content-end">
+                    <button type="submit" class="btn btn-primary col-2" id="formsubmit">Save and Next</button>
+                </div>
+            </div>
+        </form>
+        </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      
+    </div>
+{% endblock content %}
+

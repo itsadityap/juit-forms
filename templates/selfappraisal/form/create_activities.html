@@ -1,0 +1,83 @@
+{% extends "base_with_nav.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Appraisal</h4>
+      <!-- Basic Layout -->
+      <div class="row">
+        <div class="col-xl">
+          <div class="card mb-4">
+
+            <form method="POST">
+                {% csrf_token %}
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">13.</h4>
+              <small class="text-muted float-end">"USE THIS"</small>
+            </div>
+            <div class="card-body">
+              
+                <div class="row mb-3"> 
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.students_extra_curricular.id_for_label }}">{{form.students_extra_curricular.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.students_extra_curricular.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.students_extra_curricular|add_class:"form-control"|attr:"placeholder:Your students_extra_curricular" %}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.departmental_activities.id_for_label }}">{{form.departmental_activities.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.departmental_activities.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.departmental_activities|add_class:"form-control"|attr:"placeholder:Your departmental_activities" %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3"> 
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.institute_activities.id_for_label }}">{{form.institute_activities.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.institute_activities.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.institute_activities|add_class:"form-control"|attr:"placeholder:Your institute_activities" %}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.invited_lectures.id_for_label }}">{{form.invited_lectures.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.invited_lectures.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.invited_lectures|add_class:"form-control"|attr:"placeholder:Your invited_lectures" %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3"> 
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.articles_monographs.id_for_label }}">{{form.articles_monographs.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.articles_monographs.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.articles_monographs|add_class:"form-control"|attr:"placeholder:Your articles_monographs" %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end">
+                    <button type="submit" class="btn btn-primary col-2" id="formsubmit">Save and Next</button>
+                </div>
+            </div>
+        </form>
+        </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      
+    </div>
+{% endblock content %}
+

@@ -10,6 +10,8 @@ urlpatterns = [
     path('form/<int:pk>/', views.form_dashboard_view, name='formdashboard'),
     path('form/<int:pk>/knowledge-extension', views.SelfAppraisalKnowledgeExtensionView.as_view(), name='knowledge-extension'),
     path('form/<int:pk>/guided-extension', views.SelfAppraisalGuidedExtensionView.as_view(), name='guided-extension'),
+    path('form/<int:pk>/activities', views.SelfAppraisalActivitiesView.as_view(), name='activity-extension'),
+    path('form/<int:pk>/end', views.SelfAppraisalEndView.as_view(), name='end-extension'),
 
     # Event CRUD
     path('form/<int:pk>/event/create/', views.EventCreateView.as_view(), name="createevent"),

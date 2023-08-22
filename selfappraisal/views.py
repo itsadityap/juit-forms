@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView
-from selfappraisal.form import SelfAppraisalFormModelFormMain, EventModelForm, CourseModelForm, KnowledgeResourcesModelForm, SelfAppraisalKnowledgeModelFormMain, SelfAppraisalKnowledgeModelFormMain
+from selfappraisal.form import SelfAppraisalEndFormMain,SelfAppraisalFormModelFormMain,SelfAppraisalActivitiesFormMain, EventModelForm, CourseModelForm, KnowledgeResourcesModelForm, SelfAppraisalKnowledgeModelFormMain, SelfAppraisalKnowledgeModelFormMain
 from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
@@ -63,6 +63,30 @@ class SelfAppraisalGuidedExtensionView(UpdateView):
     def get_success_url(self):
         return reverse_lazy("formdashboard", kwargs={'pk': self.object.pk})
 
+class SelfAppraisalActivitiesView(UpdateView):
+    model = SelfAppraisalForm
+    form_class = SelfAppraisalActivitiesFormMain
+    template_name = 'selfappraisal/form/create_activities.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formdashboard", kwargs={'pk': self.object.pk})
+    
+class SelfAppraisalEndView(UpdateView):
+    model = SelfAppraisalForm
+    form_class = SelfAppraisalEndFormMain
+    template_name = 'selfappraisal/form/create_end.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formdashboard", kwargs={'pk': self.object.pk})
+
 class EventCreateView(CreateView):
     model = Event
     form_class = EventModelForm
@@ -96,6 +120,7 @@ class EventUpdateView(UpdateView):
     def get_success_url(self):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
 
 
 # TODO: MAKE UPDATE DELETE

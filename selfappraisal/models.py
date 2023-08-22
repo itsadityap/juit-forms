@@ -57,17 +57,19 @@ class SelfAppraisalForm(models.Model):
     students_guided = models.PositiveIntegerField(null=True, blank=True) # UG Students Guided
 
     # Contribution/Participation in Students Extra & Co-Curricular activities
-    students_extra_curricular = models.TextField(blank=True)
+    students_extra_curricular = models.TextField(verbose_name="(A) Contribution/ Participation in Students Extra & Co- Curricular activities:",blank=True)
     
     # Contribution/Participation in Departmental Activities & Development
-    departmental_activities = models.TextField(blank=True)
+    departmental_activities = models.TextField(verbose_name="(B) Contribution/ Participation in Departmental Activities & Development:",blank=True)
     
     # Contribution/Participation in Institute Activities & Development
-    institute_activities = models.TextField(blank=True)
+    institute_activities = models.TextField(verbose_name="(C) Contribution/ Participation in Institute Activities & Development:",blank=True)
     
     # Special/Extension/Expert/Invited Lectures Delivered
-    invited_lectures = models.TextField(blank=True)
+    invited_lectures = models.TextField(verbose_name="(D) Special/ Extension/ Expert/Invited Lectures Delivered, Give Details:",blank=True)
     
+    # Articles, Monographs, Technical Reports, Reviews Written, Give Details:
+    articles_monographs = models.TextField(verbose_name="(E) Articles, Monographs, Technical Reports, Reviews Written, Give Details:",blank=True)
 
     # 18. Membership of Professional Bodies/ National/ International Committees:
     # 19. Any Other Information:

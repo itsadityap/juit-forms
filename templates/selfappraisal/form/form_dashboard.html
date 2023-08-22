@@ -351,17 +351,305 @@
                     <!-- /Account -->
                 </div>
             </div>
-
-          
             
-        
+            <div class="card mb-4">
+                <h5 class="card-header">13. </h5>
+                <hr class="my-0" />
+                <div class="card-body">
+                <form id="formAccountSettings" method="POST" onsubmit="return false">
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">(A) Contribution/ Participation in Students Extra & Co- Curricular activities:</label>
+                            <textarea class="form-control" disabled/>{{form.students_extra_curricular}}</textarea>
+                        </div>
+                        
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">(B) Contribution/ Participation in Departmental Activities & Development:</label>
+                            <textarea class="form-control" disabled/>{{form.departmental_activities}}</textarea>
+                        </div>
+                        
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">(C) Contribution/ Participation in Institute Activities & Development:</label>
+                            <textarea class="form-control" disabled/>{{form.institute_activities}}</textarea>
+                        </div>
+                        
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">(D) Special/ Extension/ Expert/Invited Lectures Delivered, Give Details:</label>
+                            <textarea class="form-control" disabled/>{{form.invited_lectures}}</textarea>
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">(E) Articles, Monographs, Technical Reports, Reviews Written, Give Details:</label>
+                            <textarea class="form-control" disabled/>{{form.articles_monographs}}</textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2 row justify-content-end">
+                        <a href="{% url 'activity-extension' form.id %}" class="btn btn-primary me-2 col-2">Edit</a>
+                    </div>
+                </form>
+                </div>
+                <!-- /Account -->
+            </div>
+          
+            <div class="card mb-4">
+                <h5 class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            14. Research Papers Published/ Presented:
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <a href="{% url 'createevent' form.id %}" class="btn btn-primary">
+                                <i class="bx bx-plus"></i> Add Event
+                            </a>
+                        </div>
+                    </div>
+                </h5>
+                
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Title</th>
+                            <th>Sponsoring Agency</th>
+                            <th>Organization</th>
+                            <th>Place Held</th>
+                            <th>Attended/Organized</th>
+                            <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% if events  %}
+                                {% for event in events %}
+                                    <tr>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{event.title}}</strong></td>
+                                        <td>{{event.sponsoring_agency}}</td>
+                                        <td>{{event.organization}}</td>
+                                        <td>{{event.place_held}}</td>
+                                        <td>
+                                            <span class="badge bg-label-{% if event.attended_organized == "Organized" %}primary{% else %}info{% endif %} me-1">
+                                                {{event.attended_organized}}
+                                            </span>    
+                                        </td>
+                                        <td>
+                                            <div class="row"> 
+                                                <a class="col-2 " href="{% url 'update-event' form.id event.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2" href="{% url 'delete-event' form.id event.id %}"><i class="bx bx-trash me-1"></i></a>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center">No Events Found</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <h5 class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            15. Books, Chapters in Books Written:
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <a href="{% url 'createevent' form.id %}" class="btn btn-primary">
+                                <i class="bx bx-plus"></i> Add Event
+                            </a>
+                        </div>
+                    </div>
+                </h5>
+                
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Title</th>
+                            <th>Sponsoring Agency</th>
+                            <th>Organization</th>
+                            <th>Place Held</th>
+                            <th>Attended/Organized</th>
+                            <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% if events  %}
+                                {% for event in events %}
+                                    <tr>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{event.title}}</strong></td>
+                                        <td>{{event.sponsoring_agency}}</td>
+                                        <td>{{event.organization}}</td>
+                                        <td>{{event.place_held}}</td>
+                                        <td>
+                                            <span class="badge bg-label-{% if event.attended_organized == "Organized" %}primary{% else %}info{% endif %} me-1">
+                                                {{event.attended_organized}}
+                                            </span>    
+                                        </td>
+                                        <td>
+                                            <div class="row"> 
+                                                <a class="col-2 " href="{% url 'update-event' form.id event.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2" href="{% url 'delete-event' form.id event.id %}"><i class="bx bx-trash me-1"></i></a>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center">No Events Found</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <h5 class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            16. Research Projects and Consultancy Works:
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <a href="{% url 'createevent' form.id %}" class="btn btn-primary">
+                                <i class="bx bx-plus"></i> Add Event
+                            </a>
+                        </div>
+                    </div>
+                </h5>
+                
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Title</th>
+                            <th>Sponsoring Agency</th>
+                            <th>Organization</th>
+                            <th>Place Held</th>
+                            <th>Attended/Organized</th>
+                            <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% if events  %}
+                                {% for event in events %}
+                                    <tr>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{event.title}}</strong></td>
+                                        <td>{{event.sponsoring_agency}}</td>
+                                        <td>{{event.organization}}</td>
+                                        <td>{{event.place_held}}</td>
+                                        <td>
+                                            <span class="badge bg-label-{% if event.attended_organized == "Organized" %}primary{% else %}info{% endif %} me-1">
+                                                {{event.attended_organized}}
+                                            </span>    
+                                        </td>
+                                        <td>
+                                            <div class="row"> 
+                                                <a class="col-2 " href="{% url 'update-event' form.id event.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2" href="{% url 'delete-event' form.id event.id %}"><i class="bx bx-trash me-1"></i></a>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center">No Events Found</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <h5 class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            17. Research Guidance: 
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <a href="{% url 'createevent' form.id %}" class="btn btn-primary">
+                                <i class="bx bx-plus"></i> Add Event
+                            </a>
+                        </div>
+                    </div>
+                </h5>
+                
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Title</th>
+                            <th>Sponsoring Agency</th>
+                            <th>Organization</th>
+                            <th>Place Held</th>
+                            <th>Attended/Organized</th>
+                            <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% if events  %}
+                                {% for event in events %}
+                                    <tr>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{event.title}}</strong></td>
+                                        <td>{{event.sponsoring_agency}}</td>
+                                        <td>{{event.organization}}</td>
+                                        <td>{{event.place_held}}</td>
+                                        <td>
+                                            <span class="badge bg-label-{% if event.attended_organized == "Organized" %}primary{% else %}info{% endif %} me-1">
+                                                {{event.attended_organized}}
+                                            </span>    
+                                        </td>
+                                        <td>
+                                            <div class="row"> 
+                                                <a class="col-2 " href="{% url 'update-event' form.id event.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2" href="{% url 'delete-event' form.id event.id %}"><i class="bx bx-trash me-1"></i></a>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center">No Events Found</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">18. Membership of Professional Bodies/ National/ International Committees:</label>
+                                <textarea class="form-control" disabled/>{{form.member_of_professional_bodies}}</textarea>
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">19. Any Other Information:</label>
+                                <textarea class="form-control" disabled/>{{form.any_other_information}}</textarea>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">20. List of Enclosures:</label>
+                                <textarea class="form-control" disabled/>{{form.list_of_enclosures}}</textarea>
+                            </div>
+                        </div>
+                        <div class="mt-2 row justify-content-end">
+                            <a href="{% url 'end-extension' form.id %}" class="btn btn-primary me-2 col-2">Edit</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
           <div class="card">
             <h5 class="card-header">Delete Account</h5>
             <div class="card-body">
               <div class="mb-3 col-12 mb-0">
                 <div class="alert alert-warning">
-                  <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
+                  <h6 class="alert-heading fw-bold mb-1">?</h6>
                   <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
                 </div>
               </div>

@@ -43,6 +43,11 @@ class FormOwnershipTestExtensionMixin:
 
         return form
 
+def check_model_ownership(request, model_obj):
+    if request.user == model_obj.form.name:
+        return True
+    else:
+        return False
 
 # Create your views here.
 @login_required
@@ -159,6 +164,10 @@ class EventUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,UpdateView):
 @login_required
 def delete_event_view(request, pk, event_id):
     event = get_object_or_404(Event, id=event_id)
+
+    if not check_model_ownership(request, event):
+        raise PermissionDenied("You do not have permission to perform this action.")
+    
     if event.form.id == pk:
         event.delete()
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
@@ -200,6 +209,10 @@ class CourseUpdateView(LoginRequiredMixin,UpdateView):
 @login_required
 def delete_course_view(request, pk, course_id):
     course = get_object_or_404(Course, id=course_id)
+
+    if not check_model_ownership(request, course):
+        raise PermissionDenied("You do not have permission to perform this action.")
+    
     if course.form.id == pk:
         course.delete()
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
@@ -241,6 +254,10 @@ class KnowledgeResourcesUpdateView(LoginRequiredMixin,UpdateView):
 @login_required
 def delete_knowledge_resources_view(request, pk, knowledge_resource_id):
     knowledge_resource = get_object_or_404(KnowledgeResources, id=knowledge_resource_id)
+
+    if not check_model_ownership(request, knowledge_resource):
+        raise PermissionDenied("You do not have permission to perform this action.")
+
     if knowledge_resource.form.id == pk:
         knowledge_resource.delete()
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
@@ -282,6 +299,10 @@ class ResearchProjectUpdateView(LoginRequiredMixin,UpdateView):
 @login_required
 def delete_research_project_view(request, pk, research_project_id):
     research_project = get_object_or_404(ResearchProject, id=research_project_id)
+
+    if not check_model_ownership(request, research_project):
+        raise PermissionDenied("You do not have permission to perform this action.")
+
     if research_project.form.id == pk:
         research_project.delete()
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
@@ -324,6 +345,10 @@ class PublicationUpdateView(LoginRequiredMixin,UpdateView):
 @login_required
 def delete_publication_view(request, pk, publication_id):
     publication = get_object_or_404(Publication, id=publication_id)
+
+    if not check_model_ownership(request, publication):
+        raise PermissionDenied("You do not have permission to perform this action.")
+    
     if publication.form.id == pk:
         publication.delete()
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
@@ -366,6 +391,10 @@ class ResearchGuidanceCreateView(LoginRequiredMixin,CreateView):
 @login_required
 def delete_research_guidance_view(request, pk, research_guidance_id):
     research_guidance = get_object_or_404(ResearchGuidance, id=research_guidance_id)
+
+    if not check_model_ownership(request, research_guidance):
+        raise PermissionDenied("You do not have permission to perform this action.")
+    
     if research_guidance.form.id == pk:
         research_guidance.delete()
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
@@ -408,6 +437,9 @@ class EvolutionOfCoursesUpdateView(LoginRequiredMixin,UpdateView):
 def form_dashboard_view(request, pk):
 
     mainform_obj = SelfAppraisalForm.objects.get(pk=pk)
+
+    # if mainform_obj.name != request.user:
+    #     raise PermissionDenied("You do not have permission to view this form.")
 
     # if post request
     if request.method == 'POST':

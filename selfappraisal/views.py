@@ -121,8 +121,14 @@ class EventUpdateView(UpdateView):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
+def delete_event_view(request, pk, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    if event.form.id == pk:
+        event.delete()
+    formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
+    return HttpResponseRedirect(formdashboard_url)
 
-# TODO: MAKE UPDATE DELETE
+
 class CourseCreateView(CreateView):
     model = Course
     form_class = CourseModelForm
@@ -157,6 +163,13 @@ class CourseUpdateView(UpdateView):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
+def delete_course_view(request, pk, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    if course.form.id == pk:
+        course.delete()
+    formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
+    return HttpResponseRedirect(formdashboard_url)
+
 class KnowledgeResourcesCreateView(CreateView):
     model = KnowledgeResources
     form_class = KnowledgeResourcesModelForm
@@ -190,13 +203,13 @@ class KnowledgeResourcesUpdateView(UpdateView):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
-# TODO: @rishabh fix this 
-def delete_event_view(request, pk, event_id):
-    event = get_object_or_404(Event, id=event_id)
-    if event.form.id == pk:
-        event.delete()
+def delete_knowledge_resources_view(request, pk, knowledge_resource_id):
+    knowledge_resource = get_object_or_404(KnowledgeResources, id=knowledge_resource_id)
+    if knowledge_resource.form.id == pk:
+        knowledge_resource.delete()
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
     return HttpResponseRedirect(formdashboard_url)
+
 
 class ResearchProjectCreateView(CreateView):
     model = ResearchProject
@@ -231,6 +244,14 @@ class ResearchProjectUpdateView(UpdateView):
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
     
 
+def delete_research_project_view(request, pk, research_project_id):
+    research_project = get_object_or_404(ResearchProject, id=research_project_id)
+    if research_project.form.id == pk:
+        research_project.delete()
+    formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
+    return HttpResponseRedirect(formdashboard_url)
+
+
 class PublicationCreateView(CreateView):
     model = Publication
     form_class = PublicationModelForm
@@ -263,6 +284,13 @@ class PublicationUpdateView(UpdateView):
     def get_success_url(self):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
+def delete_publication_view(request, pk, publication_id):
+    publication = get_object_or_404(Publication, id=publication_id)
+    if publication.form.id == pk:
+        publication.delete()
+    formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
+    return HttpResponseRedirect(formdashboard_url)
 
 
 class ResearchGuidanceUpdateView(UpdateView):
@@ -297,6 +325,14 @@ class ResearchGuidanceCreateView(CreateView):
     def get_success_url(self):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
+
+def delete_research_guidance_view(request, pk, research_guidance_id):
+    research_guidance = get_object_or_404(ResearchGuidance, id=research_guidance_id)
+    if research_guidance.form.id == pk:
+        research_guidance.delete()
+    formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
+    return HttpResponseRedirect(formdashboard_url)
 
 class EvolutionOfCoursesCreateView(CreateView):
     model = EvaluationDuties

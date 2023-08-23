@@ -22,6 +22,7 @@ from selfappraisal import views
 urlpatterns = [
     path('', include("selfappraisal.urls")),
     path('admin/', admin.site.urls),
+    path('auth/', include('authfort.urls')),
 ]
 
 if settings.DEBUG:

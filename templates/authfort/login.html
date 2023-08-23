@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block main %}
+    <link rel="stylesheet" href="{% static 'css/page-auth.css' %}">
+    <div class="container-xxl">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+          <!-- Register -->
+          <div class="card">
+            <div class="card-body">
+              <!-- Logo -->
+              <br>
+              <div class="app-brand justify-content-center">
+                <a class="app-brand-link gap-2">
+                  <h4 class="mb-2">JUIT Self Appraisal Form Login</h4>
+                </a>
+              </div>
+              <!-- /Logo -->
+              
+              <form method="POST">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Employee Code</label>
+                    {% render_field form.username|add_class:"form-control"|attr:"placeholder:Your Username" %}
+                  </div>
+                  <div class="mb-3 form-password-toggle">
+                    <div class="d-flex justify-content-between">
+                      <label class="form-label" for="password">Password/Pin</label>
+
+                    </div>
+                    <div class="input-group input-group-merge">
+                      {% render_field form.password|add_class:"form-control"|attr:"placeholder:Your Password" %}
+                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+          <!-- /Register -->
+        </div>
+      </div>
+    </div>
+{% endblock main %}

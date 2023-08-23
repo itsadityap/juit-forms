@@ -26,47 +26,37 @@
                 <div >New Form</div>
               </a>
             </li>
-            <li class="menu-item {% if nbar == 'dashboard' %}active{% endif %}">
-              <a href="" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div >Forms</div>
-              </a>
-            </li>
-            <li class="menu-item {% if nbar == 'Logging' %}active{% endif %}">
-              <a href="" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div >Submitted Forms</div>
-              </a>
-            </li>
+      
+            {% if request.user.user_type == 1 %}
+              <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Reviewer Options</span>
+              </li>
 
-
-            {% if request.user.is_staff %}
-            <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Reviewer Options</span>
-            </li>
-
-            <li class="menu-item {% if nbar == 'awserrors' %}active{% endif %}">
-              <a href="" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div >Review</div>
-              </a>
-            </li>
-            <!-- Tables -->
-            <li class="menu-item {% if nbar == 'addMachine' %}active open{% endif %}">
-              <a class="menu-link">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Reviewed Forms</div>
-              </a>
+              <li class="menu-item {% if nbar == 'awserrors' %}active{% endif %}">
+                <a href="" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                  <div >Review</div>
+                </a>
+              </li>
+              <!-- Tables -->
+              <li class="menu-item {% if nbar == 'addMachine' %}active open{% endif %}">
+                <a class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-layout"></i>
+                  <div data-i18n="Layouts">Reviewed Forms</div>
+                </a>
               </li>
 
           {% endif %}
-          <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Profile Options</span>
+          </ul>
+          <ul class="menu-inner py-1">
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Account Options</span>
             </li>
-          <li class="menu-item {% if nbar == 'change_password' %}active{% endif %}">
-              <a href="" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Change Password</div>
+        
+            <li class="menu-item {% if nbar == 'awserrors' %}active{% endif %}">
+              <a href="{% url 'authfort:logout' %}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-log-out"></i>
+                <div>Logout</div>
               </a>
             </li>
           </ul>

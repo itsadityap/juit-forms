@@ -18,8 +18,6 @@ class CustomUser(AbstractUser):
 
     department = models.CharField(max_length=100, null=True)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=4)
-    
-    pass
 
 
 # Create your models here.

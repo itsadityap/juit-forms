@@ -26,6 +26,12 @@
                 <div >New Form</div>
               </a>
             </li>
+            <li class="menu-item {% if nbar == 'dashboard' %}active{% endif %}">
+              <a href="{% url 'home' %}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home"></i>
+                <div>Dashboard</div>
+              </a>
+            </li>
       
             {% if request.user.user_type == 1 %}
               <li class="menu-header small text-uppercase">
@@ -45,21 +51,21 @@
                   <div data-i18n="Layouts">Reviewed Forms</div>
                 </a>
               </li>
+             
 
           {% endif %}
+          <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Account Options</span>
+          </li>
+      
+          <li class="menu-item {% if nbar == 'awserrors' %}active{% endif %}">
+            <a href="{% url 'authfort:logout' %}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-log-out"></i>
+              <div>Logout</div>
+            </a>
+          </li>
           </ul>
-          <ul class="menu-inner py-1">
-            <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Account Options</span>
-            </li>
-        
-            <li class="menu-item {% if nbar == 'awserrors' %}active{% endif %}">
-              <a href="{% url 'authfort:logout' %}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-log-out"></i>
-                <div>Logout</div>
-              </a>
-            </li>
-          </ul>
+
         </aside>
         <!-- / Menu -->
 

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
-from selfappraisal.models import CustomUser, SelfAppraisalForm, Event, Course, KnowledgeResources, EvaluationDuties,Publication,ResearchProject, ResearchGuidance
+from selfappraisal.models import Department,CustomUser, SelfAppraisalForm, Event, Course, KnowledgeResources, EvaluationDuties,Publication,ResearchProject, ResearchGuidance
 
 class CustomUserAdmin(UserAdmin):
     # Add custom fields to the fieldsets
@@ -136,3 +136,4 @@ class SelfAppraisalFormAdmin(admin.ModelAdmin):
 admin.site.register(Event)
 admin.site.register(Course)
 admin.site.register(EvaluationDuties)
+admin.site.register(Department)

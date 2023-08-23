@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include("selfappraisal.urls")),
     path('admin/', admin.site.urls),
     path('auth/', include('authfort.urls')),
+    path('formreview/', include('formreview.urls')),
 ]
 
 if settings.DEBUG:

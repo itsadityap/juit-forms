@@ -16,16 +16,20 @@ class CustomUser(AbstractUser):
         (4, 'Faculty'),
     )
 
-    department = models.CharField(max_length=100, null=True)
+    department = models.ForeignKey('Department', on_delete=models.CASCADE, null=True, blank=True)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=4)
 
+class Department(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
 
-# Create your models here.
 
 class SelfAppraisalForm(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # Name
     
-    department = models.CharField(verbose_name="2. Department", max_length=100)  # Department
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True, blank=True) # Department
     
     qualifications = models.CharField(verbose_name="3. Qualifications" ,max_length=100,null=True, blank=True) # Qualifications
 
@@ -98,9 +102,6 @@ class SelfAppraisalForm(models.Model):
         return self.name.username
     
 
-
-
-
 class Event(models.Model):
     attended_organized_choices = [
         ('Attended', 'Attended'),
@@ -147,6 +148,7 @@ class Course(models.Model):
    
     def __str__(self):
         return f"{self.course_code} - {self.course_title}"
+
 
 class KnowledgeResources(models.Model):
     form = models.ForeignKey(SelfAppraisalForm, on_delete=models.CASCADE)
@@ -224,7 +226,6 @@ class ResearchProject(models.Model):
         return self.title
 
 
-# Research Guidance
 class ResearchGuidance(models.Model):
     level_choices = [
         ('PhD', 'PhD'),

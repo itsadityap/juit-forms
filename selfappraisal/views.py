@@ -259,7 +259,18 @@ class EvolutionOfCoursesUpdateView(UpdateView):
     
 
 def form_dashboard_view(request, pk):
+
     mainform_obj = SelfAppraisalForm.objects.get(pk=pk)
+
+    # if post request
+    if request.method == 'POST':
+        sumitcheck = request.POST.get('submitform')
+        if sumitcheck:
+            mainform_obj.self_approval = True
+            mainform_obj.save()
+            return HttpResponseRedirect(reverse('home'))
+
+    
     events = Event.objects.filter(form=mainform_obj)
     oddsemcourses = Course.objects.filter(form=mainform_obj, course_type=1)
     evensemcourses = Course.objects.filter(form=mainform_obj, course_type=2)

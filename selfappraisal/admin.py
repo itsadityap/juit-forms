@@ -124,6 +124,12 @@ class SelfAppraisalFormAdmin(admin.ModelAdmin):
         ('Approvals', {'fields': ('self_approval', 'hod_approval', 'hod_remarks', 'dean_approval', 'dean_remarks', 'vc_approval', 'vc_remarks')}),
     )
 
+    list_display = (
+        'id',
+        'name',
+    )
+
+
 
 
 

@@ -2,6 +2,13 @@ from django.shortcuts import render
 from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources, ResearchProject, Publication, ResearchGuidance, EvaluationDuties
 # Create your views here.
 
+from django.views.generic import UpdateView
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+
+from formreview.form import EventModelRemarkForm
+
+from django.http import Http404
 
 def home(request):
     draft_forms = SelfAppraisalForm.objects.filter(department=request.user.department).filter(
@@ -28,7 +35,6 @@ def form_review(request, pk):
         evaluation_duties = None
 
 
-    
     return render(request, 'formreview/form_review.html', 
                     {
                         'form': mainform_obj, 
@@ -43,5 +49,23 @@ def form_review(request, pk):
                         'evaluation_duties': evaluation_duties
                     }
                 )
+
+class AddEventRemarkView(UpdateView):
+    model = Event
+    form_class = EventModelRemarkForm
+    template_name = 'formreview/add_event_remark.html'
+    success_message = "Remark Added Successfully"
+    
+    def get_object(self, queryset=None):
+        event_id = self.kwargs.get('event_id')
+        event = get_object_or_404(Event, id=event_id)
+
+        if event.form.pk != self.kwargs['pk']:
+            raise Http404("No matches the given query.")
+        
+        return event
+    
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
 
 

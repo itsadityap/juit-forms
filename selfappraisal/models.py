@@ -53,6 +53,10 @@ class SelfAppraisalForm(models.Model):
 
     beyond_syllabus = models.TextField(verbose_name="Any Coverage/ Introduction beyond syllabus ( give brief details )",null=True, blank=True) 
 
+    # courses remarks
+    courses_remarks_odd = models.TextField(verbose_name="Remarks by the HoD",null=True, blank=True)
+    courses_remarks_even = models.TextField(verbose_name="Remarks by the HoD",null=True, blank=True)
+
     # Number of Projects Guided
 
     projects_guided = models.PositiveIntegerField(null=True, blank=True) # UG Projects Guided
@@ -144,7 +148,6 @@ class Course(models.Model):
     total_hours_engaged = models.PositiveIntegerField()
 
     self_assessed_api_score = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    remarks = models.TextField(blank=True)
    
     def __str__(self):
         return f"{self.course_code} - {self.course_title}"

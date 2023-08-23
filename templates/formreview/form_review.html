@@ -87,6 +87,7 @@
                             <th>Organization</th>
                             <th>Place Held</th>
                             <th>Attended/Organized</th>
+                            <th>Remarks</th>
                             <th>Actions</th>
                             </tr>
                         </thead>
@@ -103,8 +104,9 @@
                                                 {{event.attended_organized}}
                                             </span>    
                                         </td>
+                                        <td>{{event.remarks}}</td>
                                         <td>
-                                            <a class="btn-sm btn-primary" href="{% url 'update-event' form.id event.id %}">Add Remark</a>
+                                            <a class="btn-sm btn-primary" href="{% url 'formreview:add-event-remark' form.id event.id %}">Add Remark</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

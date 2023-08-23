@@ -347,85 +347,95 @@
                 <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">Evaluation Duties</h4>
-                            <small class="text-muted float-end">"USE THIS"</small>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>S. No.</th>
-                                            <th>Activity</th>
-                                            <th>Class</th>
-                                            <th>T1</th>
-                                            <th>T2</th>
-                                            <th>T3</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td rowspan="2">1</td>
-                                            <td rowspan="2">No. of Q. Papers Set</td>
-                                            <td>UG</td>
-                                            <td><input type="number" class="form-control"  name="t1_ug_paper_set" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t2_ug_paper_set" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t3_ug_paper_set" disabled></td>
-                                        </tr>
-                                        <tr>
-                                            <td>PG</td>
-                                            <td><input type="number" class="form-control"  name="t1_pg_paper_set" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t2_pg_paper_set" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t3_pg_paper_set" disabled></td>
-                                        </tr>
-                                        <tr>
-                                            <td rowspan="2">2</td>
-                                            <td rowspan="2">No. of A/ B Evaluated</td>
-                                            <td>UG</td>
-                                            <td><input type="number" class="form-control"  name="t1_ug_evaluated" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t2_ug_evaluated" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t3_ug_evaluated" disabled></td>
-                                        </tr>
-                                        <tr>
-                                            <td>PG</td>
-                                            <td><input type="number" class="form-control"  name="t1_pg_evaluated" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t2_pg_evaluated" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t3_pg_evaluated" disabled></td>
-                                        </tr>
-                                        <tr>
-                                            <td rowspan="2">3</td>
-                                            <td rowspan="2">No. Of Students Examined through Practical/ Seminar/ Project Examination</td>
-                                            <td>UG</td>
-                                            <td><input type="number" class="form-control"  name="t1_ug_examined" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t2_ug_examined" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t3_ug_examined" disabled></td>
-                                        </tr>
-                                        <tr>
-                                            <td>PG</td>
-                                            <td><input type="number" class="form-control"  name="t1_pg_examined" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t2_pg_examined" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t3_pg_examined" disabled></td>
-                                        </tr>
-                                        <tr>
-                                            <td rowspan="2">4</td>
-                                            <td rowspan="2">No. of Examination Invigilation Duties</td>
-                                            <td>Allotted</td>
-                                            <td><input type="number" class="form-control"  name="t1_ug_invigilation" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t2_ug_invigilation" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t3_ug_invigilation" disabled></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Performed</td>
-                                            <td><input type="number" class="form-control"  name="t1_pg_invigilation" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t2_pg_invigilation" disabled></td>
-                                            <td><input type="number" class="form-control"  name="t3_pg_invigilation" disabled></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                {% if evaluation_duties %}
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>S. No.</th>
+                                                <th>Activity</th>
+                                                <th>Class</th>
+                                                <th>T1</th>
+                                                <th>T2</th>
+                                                <th>T3</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="2">1</td>
+                                                <td rowspan="2">No. of Q. Papers Set</td>
+                                                <td>UG</td>
+                                                {% for i in evaluation_duties.q_papers_set.UG %}
+                                                <td><input type="number" class="form-control" value="{{i}}"  name="t1_ug_paper_set" disabled></td>
+                                                {% endfor %}
+                                            </tr>
+                                            <tr>
+                                                <td>PG</td>
+                                                {% for i in evaluation_duties.q_papers_set.PG %}
+                                                <td><input type="number" class="form-control" value="{{i}}" name="t1_pg_paper_set" disabled></td>
+                                                {% endfor %}               
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2">2</td>
+                                                <td rowspan="2">No. of A/ B Evaluated</td>
+                                                <td>UG</td>
+                                                {% for i in evaluation_duties.ab_evaluated.UG %}
+                                                <td><input type="number" class="form-control" value="{{i}}"  name="t1_ug_paper_set" disabled></td>
+                                                {% endfor %}
+                                            </tr>
+                                            <tr>
+                                                <td>PG</td>
+                                                {% for i in evaluation_duties.ab_evaluated.PG %}
+                                                <td><input type="number" class="form-control" value="{{i}}"  name="t1_ug_paper_set" disabled></td>
+                                                {% endfor %}
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2">3</td>
+                                                <td rowspan="2">No. Of Students Examined through Practical/ Seminar/ Project Examination</td>
+                                                <td>UG</td>
+                                                {% for i in evaluation_duties.students_examined.UG %}
+                                                <td><input type="number" class="form-control" value="{{i}}"  name="t1_ug_paper_set" disabled></td>
+                                                {% endfor %}
+                                            </tr>
+                                            <tr>
+                                                <td>PG</td>
+                                                {% for i in evaluation_duties.students_examined.PG %}
+                                                <td><input type="number" class="form-control" value="{{i}}"  name="t1_ug_paper_set" disabled></td>
+                                                {% endfor %}
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2">4</td>
+                                                <td rowspan="2">No. of Examination Invigilation Duties</td>
+                                                <td>Allotted</td>
+                                                {% for i in evaluation_duties.invigilation_duties.ALLOTED %}
+                                                <td><input type="number" class="form-control" value="{{i}}"  name="t1_ug_paper_set" disabled></td>
+                                                {% endfor %}
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>Performed</td>              
+                                                {% for i in evaluation_duties.invigilation_duties.Performed %}
+                                                <td><input type="number" class="form-control" value="{{i}}"  name="t1_ug_paper_set" disabled></td>
+                                                {% endfor %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p>No Evaluation Duties</p>
+                                {% endif %}
                             </div>
                             <br>
-                            <div class="row justify-content-end">
-                                <button type="submit" class="btn btn-primary col-2" id="formsubmit">Save and Next</button>
-                            </div>
+                            {% if evaluation_duties %}
+                                <div class="row justify-content-end">
+                                    <a href="{% url 'update-evolution-of-courses' form.id evaluation_duties.id %}" type="submit" class="btn btn-primary col-2">Edit</a>
+                                </div>
+                            {% else %}
+                                <div class="row justify-content-end">
+                                    <a href="{% url 'create-evolution-of-courses' form.id %}" type="submit" class="btn btn-primary col-2">Add</a>
+                                </div>
+                            {% endif %}
                         </div>
                   
                     

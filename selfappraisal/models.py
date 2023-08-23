@@ -171,7 +171,7 @@ class EvaluationDuties(models.Model):
     def default_json_duties():
         return {"ALLOTED": [0, 0, 0], "Performed": [0, 0, 0]}
 
-    form = models.ForeignKey(SelfAppraisalForm, on_delete=models.CASCADE)
+    form = models.OneToOneField(SelfAppraisalForm, on_delete=models.CASCADE)
     q_papers_set = models.JSONField(default=default_json, null=True, blank=True)
     ab_evaluated = models.JSONField(default=default_json, null=True, blank=True)
     students_examined = models.JSONField(default=default_json, null=True, blank=True)

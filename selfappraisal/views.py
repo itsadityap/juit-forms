@@ -122,7 +122,6 @@ class EventUpdateView(UpdateView):
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
 
-
 # TODO: MAKE UPDATE DELETE
 class CourseCreateView(CreateView):
     model = Course
@@ -139,6 +138,24 @@ class CourseCreateView(CreateView):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
+class CourseUpdateView(UpdateView):
+    model = Course
+    form_class = CourseModelForm
+    template_name = 'selfappraisal/form/create_course.html'
+    success_message = "Hello" # TODO: ADD
+    
+    def get_object(self, queryset=None):
+        event_id = self.kwargs.get('event_id')
+        event = get_object_or_404(Event, id=event_id)
+
+        if event.form.id != self.kwargs['pk']:
+            raise Http404("No matches the given query.")
+
+        return event
+    
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
 class KnowledgeResourcesCreateView(CreateView):
     model = KnowledgeResources
@@ -253,6 +270,14 @@ def form_dashboard_view(request, pk):
     publications_papers = Publication.objects.filter(form=mainform_obj, publication_choice=1)
     publications_books = Publication.objects.filter(form=mainform_obj, publication_choice=2)
     research_guidances = ResearchGuidance.objects.filter(form=mainform_obj)
+
+    try:
+        evaluation_duties = EvaluationDuties.objects.get(form=mainform_obj)
+    except EvaluationDuties.DoesNotExist:
+        evaluation_duties = None
+
+
+    
     return render(request, 'selfappraisal/form/form_dashboard.html', 
                     {
                         'form': mainform_obj, 
@@ -264,5 +289,6 @@ def form_dashboard_view(request, pk):
                         'publication_papers': publications_papers,
                         'publication_books': publications_books,
                         'research_guidances': research_guidances,
+                        'evaluation_duties': evaluation_duties
                     }
                 )

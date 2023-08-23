@@ -44,7 +44,6 @@ class FormOwnershipTestExtensionMixin:
         return form
 
 
-# Create your views here.
 @login_required
 def home_view(request):
     return render(request, 'selfappraisal/dashboard/dashboard.html', {})
@@ -60,7 +59,6 @@ class SelfAppraisalFormCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Use self.object to access the newly created form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.object.pk})
     
 class SelfAppraisalFormUpdateView(LoginRequiredMixin,FormOwnershipTestExtensionMixin, UpdateView):
@@ -73,7 +71,6 @@ class SelfAppraisalFormUpdateView(LoginRequiredMixin,FormOwnershipTestExtensionM
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.object.pk})
     
 class SelfAppraisalKnowledgeExtensionView(LoginRequiredMixin,FormOwnershipTestExtensionMixin,UpdateView):
@@ -150,7 +147,6 @@ class EventUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,UpdateView):
 
         if event.form.id != self.kwargs['pk']:
             raise Http404("No matches the given query.")
-
         return event
     
     def get_success_url(self):
@@ -164,25 +160,24 @@ def delete_event_view(request, pk, event_id):
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
     return HttpResponseRedirect(formdashboard_url)
 
-class CourseCreateView(LoginRequiredMixin,CreateView):
+class CourseCreateView(LoginRequiredMixin,CreateView,FormOwnershipCheckOnCreateMixin):
     model = Course
     form_class = CourseModelForm
     template_name = 'selfappraisal/form/create_course.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Course Created Successfully"
 
     def form_valid(self, form):
-        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        form.instance.form = self.parent_form
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
-class CourseUpdateView(LoginRequiredMixin,UpdateView):
+class CourseUpdateView(LoginRequiredMixin,UpdateView,FormOwnershipCheckMixin):
     model = Course
     form_class = CourseModelForm
     template_name = 'selfappraisal/form/create_course.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Course Updated Successfully"
     
     def get_object(self, queryset=None):
         course_id = self.kwargs.get('course_id')
@@ -190,11 +185,9 @@ class CourseUpdateView(LoginRequiredMixin,UpdateView):
 
         if course.form.id != self.kwargs['pk']:
             raise Http404("No matches the given query.")
-
         return course
     
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
 @login_required
@@ -205,26 +198,24 @@ def delete_course_view(request, pk, course_id):
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
     return HttpResponseRedirect(formdashboard_url)
 
-class KnowledgeResourcesCreateView(LoginRequiredMixin,CreateView):
+class KnowledgeResourcesCreateView(LoginRequiredMixin,CreateView, FormOwnershipCheckOnCreateMixin):
     model = KnowledgeResources
     form_class = KnowledgeResourcesModelForm
     template_name = 'selfappraisal/form/create_resource.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Knowledge Resources Created Successfully"
 
     def form_valid(self, form):
-        # TODO: ADD PROTECTION
-        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        form.instance.form = self.parent_form
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
-class KnowledgeResourcesUpdateView(LoginRequiredMixin,UpdateView):
+class KnowledgeResourcesUpdateView(LoginRequiredMixin,UpdateView, FormOwnershipCheckMixin):
     model = KnowledgeResources
     form_class = KnowledgeResourcesModelForm
     template_name = 'selfappraisal/form/create_resource.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Knowledge Resources Updated Successfully"
     
     def get_object(self, queryset=None):
         knowledge_resource_id = self.kwargs.get('knowledge_resource_id')
@@ -235,7 +226,6 @@ class KnowledgeResourcesUpdateView(LoginRequiredMixin,UpdateView):
         return knowledge_resource
     
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
 @login_required
@@ -247,25 +237,24 @@ def delete_knowledge_resources_view(request, pk, knowledge_resource_id):
     return HttpResponseRedirect(formdashboard_url)
 
 
-class ResearchProjectCreateView(LoginRequiredMixin,CreateView):
+class ResearchProjectCreateView(LoginRequiredMixin,CreateView, FormOwnershipCheckOnCreateMixin):
     model = ResearchProject
     form_class = ResearchProjectModelForm
     template_name = 'selfappraisal/form/create_research_projects.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Research Project Created successfully"
 
     def form_valid(self, form):
-        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        form.instance.form = self.parent_form
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
-class ResearchProjectUpdateView(LoginRequiredMixin,UpdateView):
+class ResearchProjectUpdateView(LoginRequiredMixin,UpdateView,FormOwnershipCheckMixin):
     model = ResearchProject
     form_class = ResearchProjectModelForm
     template_name = 'selfappraisal/form/create_research_projects.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Research Project Updated successfully"
 
     def get_object(self, queryset=None):
         research_project_id = self.kwargs.get('research_project_id')
@@ -276,7 +265,6 @@ class ResearchProjectUpdateView(LoginRequiredMixin,UpdateView):
         return research_project
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
     
 @login_required
@@ -288,26 +276,25 @@ def delete_research_project_view(request, pk, research_project_id):
     return HttpResponseRedirect(formdashboard_url)
 
 
-class PublicationCreateView(LoginRequiredMixin,CreateView):
+class PublicationCreateView(LoginRequiredMixin,CreateView, FormOwnershipCheckOnCreateMixin):
     model = Publication
     form_class = PublicationModelForm
     template_name = 'selfappraisal/form/create_books_publications.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Publication Created Succesfully" 
 
     def form_valid(self, form):
-        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        form.instance.form = self.parent_form
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
     
 
-class PublicationUpdateView(LoginRequiredMixin,UpdateView):
+class PublicationUpdateView(LoginRequiredMixin,UpdateView,FormOwnershipCheckMixin):
     model = Publication
     form_class = PublicationModelForm
     template_name = 'selfappraisal/form/create_books_publications.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Publication Updated Succesfully" 
 
     def get_object(self, queryset=None):
         publication_id = self.kwargs.get('publication_id')
@@ -318,7 +305,6 @@ class PublicationUpdateView(LoginRequiredMixin,UpdateView):
         return publication
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
 @login_required
@@ -330,11 +316,11 @@ def delete_publication_view(request, pk, publication_id):
     return HttpResponseRedirect(formdashboard_url)
 
 
-class ResearchGuidanceUpdateView(LoginRequiredMixin,UpdateView):
+class ResearchGuidanceUpdateView(LoginRequiredMixin,UpdateView, FormOwnershipCheckMixin):
     model = ResearchGuidance
     form_class = ResearchGuidanceModelForm
     template_name = 'selfappraisal/form/create_research_guidance.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Research Guidance Updated successfully" 
 
     def get_object(self, queryset=None):
         research_guidance_id = self.kwargs.get('research_guidance_id')
@@ -345,22 +331,20 @@ class ResearchGuidanceUpdateView(LoginRequiredMixin,UpdateView):
         return research_guidance
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
 
-class ResearchGuidanceCreateView(LoginRequiredMixin,CreateView):
+class ResearchGuidanceCreateView(LoginRequiredMixin,CreateView, FormOwnershipCheckOnCreateMixin):
     model = ResearchGuidance
     form_class = ResearchGuidanceModelForm
     template_name = 'selfappraisal/form/create_research_guidance.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Research Guidance created successfully" 
 
     def form_valid(self, form):
-        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        form.instance.form = self.parent_form
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
 @login_required
@@ -371,25 +355,24 @@ def delete_research_guidance_view(request, pk, research_guidance_id):
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
     return HttpResponseRedirect(formdashboard_url)
 
-class EvolutionOfCoursesCreateView(LoginRequiredMixin,CreateView):
+class EvolutionOfCoursesCreateView(LoginRequiredMixin,CreateView,FormOwnershipCheckOnCreateMixin):
     model = EvaluationDuties
     form_class = EvaluationDutiesForm
     template_name = 'selfappraisal/form/create_evolution_duties.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Evolution of Course created successfully"
 
     def form_valid(self, form):
-        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        form.instance.form = self.parent_form
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
-class EvolutionOfCoursesUpdateView(LoginRequiredMixin,UpdateView):
+class EvolutionOfCoursesUpdateView(LoginRequiredMixin,UpdateView, FormOwnershipCheckMixin):
     model = EvaluationDuties
     form_class = EvaluationDutiesForm
     template_name = 'selfappraisal/form/create_evolution_duties.html'
-    success_message = "Hello" # TODO: ADD
+    success_message = "Evolution of Course updated successfully"
 
     def get_object(self, queryset=None):
         eval_obj = self.kwargs.get('evolution_of_courses_id')
@@ -401,7 +384,6 @@ class EvolutionOfCoursesUpdateView(LoginRequiredMixin,UpdateView):
         return event
 
     def get_success_url(self):
-        # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
     
 @login_required
@@ -409,7 +391,6 @@ def form_dashboard_view(request, pk):
 
     mainform_obj = SelfAppraisalForm.objects.get(pk=pk)
 
-    # if post request
     if request.method == 'POST':
         sumitcheck = request.POST.get('submitform')
         if sumitcheck:
@@ -423,7 +404,6 @@ def form_dashboard_view(request, pk):
     evensemcourses = Course.objects.filter(form=mainform_obj, course_type=2)
 
     knowledge_resources = KnowledgeResources.objects.filter(form=mainform_obj)
-    # create fo
     research_projects = ResearchProject.objects.filter(form=mainform_obj)
     publications_papers = Publication.objects.filter(form=mainform_obj, publication_choice=1)
     publications_books = Publication.objects.filter(form=mainform_obj, publication_choice=2)

@@ -1,0 +1,113 @@
+{% extends "base_with_nav.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Evaluation Duties</h4>
+        <!-- Basic Layout -->
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% render_field form.q_papers_set|attr:"hidden" %}
+                        {% render_field form.ab_evaluated|attr:"hidden" %}
+                        {% render_field form.students_examined|attr:"hidden" %}
+                        {% render_field form.invigilation_duties|attr:"hidden" %}
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Evaluation Duties</h4>
+                            <small class="text-muted float-end">"USE THIS"</small>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>S. No.</th>
+                                            <th>Activity</th>
+                                            <th>Class</th>
+                                            <th>T1</th>
+                                            <th>T2</th>
+                                            <th>T3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="2">1</td>
+                                            <td rowspan="2">No. of Q. Papers Set</td>
+                                            <td>UG</td>
+                                            <td>{% render_field form.q_papers_set_UG_0|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.q_papers_set_UG_1|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.q_papers_set_UG_2|add_class:"form-control" %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>PG</td>
+                                            <td>{% render_field form.q_papers_set_PG_0|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.q_papers_set_PG_1|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.q_papers_set_PG_2|add_class:"form-control" %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">2</td>
+                                            <td rowspan="2">No. of A/ B Evaluated</td>
+                                            <td>UG</td>
+                                            <td>{% render_field form.ab_evaluated_UG_0|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.ab_evaluated_UG_1|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.ab_evaluated_UG_2|add_class:"form-control" %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>PG</td>
+                                            <td>{% render_field form.ab_evaluated_PG_0|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.ab_evaluated_PG_1|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.ab_evaluated_PG_2|add_class:"form-control" %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">3</td>
+                                            <td rowspan="2">No. Of Students Examined through Practical/ Seminar/ Project Examination</td>
+                                            <td>UG</td>
+                                            <td>{% render_field form.students_examined_UG_0|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.students_examined_UG_1|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.students_examined_UG_2|add_class:"form-control" %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>PG</td>
+                                            <td>{% render_field form.students_examined_PG_0|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.students_examined_PG_1|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.students_examined_PG_2|add_class:"form-control" %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">4</td>
+                                            <td rowspan="2">No. of Examination Invigilation Duties</td>
+                                            <td>Allotted</td>
+                                            <td>{% render_field form.invigilation_duties_ALLOTED_0|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.invigilation_duties_ALLOTED_1|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.invigilation_duties_ALLOTED_2|add_class:"form-control" %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Performed</td>
+                                            <td>{% render_field form.invigilation_duties_Performed_0|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.invigilation_duties_Performed_1|add_class:"form-control" %}</td>
+                                            <td>{% render_field form.invigilation_duties_Performed_2|add_class:"form-control" %}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                            <div class="row justify-content-end">
+                                <button type="submit" class="btn btn-primary col-2" id="formsubmit">Save and Next</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

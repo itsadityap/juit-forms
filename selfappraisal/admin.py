@@ -129,3 +129,4 @@ class SelfAppraisalFormAdmin(admin.ModelAdmin):
 
 admin.site.register(Event)
 admin.site.register(Course)
+admin.site.register(EvaluationDuties)

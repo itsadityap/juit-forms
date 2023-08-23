@@ -172,12 +172,12 @@ class EvaluationDuties(models.Model):
         return {"ALLOTED": [0, 0, 0], "Performed": [0, 0, 0]}
 
     form = models.ForeignKey(SelfAppraisalForm, on_delete=models.CASCADE)
-    q_papers_set = models.JSONField(default=default_json)
-    ab_evaluated = models.JSONField(default=default_json)
-    students_examined = models.JSONField(default=default_json)
-    invigilation_duties = models.JSONField(default=default_json_duties)
-    api_score = models.IntegerField()
-    hod_remarks = models.TextField()
+    q_papers_set = models.JSONField(default=default_json, null=True, blank=True)
+    ab_evaluated = models.JSONField(default=default_json, null=True, blank=True)
+    students_examined = models.JSONField(default=default_json, null=True, blank=True)
+    invigilation_duties = models.JSONField(default=default_json_duties, null=True, blank=True)
+    api_score = models.IntegerField(null=True, blank=True)
+    hod_remarks = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"form: {self.form}"

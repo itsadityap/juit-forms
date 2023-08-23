@@ -1,5 +1,5 @@
 from django import forms
-from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources, ResearchProject, Publication, ResearchGuidance
+from selfappraisal.models import EvaluationDuties,SelfAppraisalForm, Event, Course, KnowledgeResources, ResearchProject, Publication, ResearchGuidance
 
 class SelfAppraisalFormModelFormMain(forms.ModelForm):
     class Meta:
@@ -88,3 +88,40 @@ class ResearchGuidanceModelForm(forms.ModelForm):
     class Meta:
         model  = ResearchGuidance
         exclude = ['form']
+
+class EvaluationDutiesForm(forms.ModelForm):
+    class Meta:
+        model = EvaluationDuties
+        fields = (
+            'q_papers_set', 
+            'ab_evaluated', 
+            'students_examined', 
+            'invigilation_duties',
+        )
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        json_fields = ['q_papers_set', 'ab_evaluated', 'students_examined', 'invigilation_duties']
+        for field_name in json_fields:
+            initial_data = getattr(self.instance, field_name, {})
+            for key in initial_data:
+                for index, value in enumerate(initial_data[key]):
+                    field_key = f'{field_name}_{key}_{index}'
+                    print(field_key)
+                    self.fields[field_key] = forms.IntegerField(initial=value)
+                    self.fields[field_key].label = f'{key.capitalize()} {index + 1}'
+    
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        
+        json_fields = ['q_papers_set', 'ab_evaluated', 'students_examined', 'invigilation_duties']
+        for field_name in json_fields:
+            json_data = self.cleaned_data[field_name]
+            for key in json_data:
+                json_data[key] = [self.cleaned_data[f'{field_name}_{key}_{index}'] for index in range(len(json_data[key]))]
+            setattr(instance, field_name, json_data)
+        
+        if commit:
+            instance.save()
+        return instance

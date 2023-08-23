@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView
-from selfappraisal.form import SelfAppraisalEndFormMain,SelfAppraisalFormModelFormMain,SelfAppraisalActivitiesFormMain, EventModelForm, CourseModelForm, KnowledgeResourcesModelForm, SelfAppraisalKnowledgeModelFormMain, SelfAppraisalKnowledgeModelFormMain, ResearchProjectModelForm, PublicationModelForm, ResearchGuidanceModelForm
-from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources, ResearchProject, Publication, ResearchGuidance
+from selfappraisal.form import EvaluationDutiesForm,SelfAppraisalEndFormMain,SelfAppraisalFormModelFormMain,SelfAppraisalActivitiesFormMain, EventModelForm, CourseModelForm, KnowledgeResourcesModelForm, SelfAppraisalKnowledgeModelFormMain, SelfAppraisalKnowledgeModelFormMain, ResearchProjectModelForm, PublicationModelForm, ResearchGuidanceModelForm
+from selfappraisal.models import EvaluationDuties,SelfAppraisalForm, Event, Course, KnowledgeResources, ResearchProject, Publication, ResearchGuidance
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponseRedirect
@@ -207,6 +207,39 @@ class ResearchGuidanceCreateView(CreateView):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
+class EvolutionOfCoursesCreateView(CreateView):
+    model = EvaluationDuties
+    form_class = EvaluationDutiesForm
+    template_name = 'selfappraisal/form/create_evolution_duties.html'
+    success_message = "Hello" # TODO: ADD
+
+    def form_valid(self, form):
+        form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
+class EvolutionOfCoursesUpdateView(UpdateView):
+    model = EvaluationDuties
+    form_class = EvaluationDutiesForm
+    template_name = 'selfappraisal/form/create_evolution_duties.html'
+    success_message = "Hello" # TODO: ADD
+
+    def get_object(self, queryset=None):
+        eval_obj = self.kwargs.get('evolution_of_courses_id')
+        event = get_object_or_404(EvaluationDuties, id=eval_obj)
+
+        if event.form.id != self.kwargs['pk']:
+            raise Http404("No matches the given query.")
+
+        return event
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+    
 
 def form_dashboard_view(request, pk):
     mainform_obj = SelfAppraisalForm.objects.get(pk=pk)

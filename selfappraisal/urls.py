@@ -32,4 +32,8 @@ urlpatterns = [
 
     # Research Guidance CRUD
     path('form/<int:pk>/research-guidance/create/', views.ResearchGuidanceCreateView.as_view(), name="create-research-guidance"),
+
+    # Evolution of Courses CRUD
+    path('form/<int:pk>/evolution-of-courses/create/', views.EvolutionOfCoursesCreateView.as_view(), name="create-evolution-of-courses"),
+    path('form/<int:pk>/evolution-of-courses/<int:evolution_of_courses_id>/update/', views.EvolutionOfCoursesUpdateView.as_view(), name="update-evolution-of-courses"),
 ]

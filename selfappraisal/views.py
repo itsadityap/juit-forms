@@ -145,13 +145,13 @@ class CourseUpdateView(UpdateView):
     success_message = "Hello" # TODO: ADD
     
     def get_object(self, queryset=None):
-        event_id = self.kwargs.get('event_id')
-        event = get_object_or_404(Event, id=event_id)
+        course_id = self.kwargs.get('course_id')
+        course = get_object_or_404(Course, id=course_id)
 
-        if event.form.id != self.kwargs['pk']:
+        if course.form.id != self.kwargs['pk']:
             raise Http404("No matches the given query.")
 
-        return event
+        return course
     
     def get_success_url(self):
         # Use self.object to access the updated form instance
@@ -168,6 +168,24 @@ class KnowledgeResourcesCreateView(CreateView):
         form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
 
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
+class KnowledgeResourcesUpdateView(UpdateView):
+    model = KnowledgeResources
+    form_class = KnowledgeResourcesModelForm
+    template_name = 'selfappraisal/form/create_resource.html'
+    success_message = "Hello" # TODO: ADD
+    
+    def get_object(self, queryset=None):
+        knowledge_resource_id = self.kwargs.get('knowledge_resource_id')
+        knowledge_resource = get_object_or_404(KnowledgeResources, id=knowledge_resource_id)
+
+        if knowledge_resource.form.id != self.kwargs['pk']:
+            raise Http404("No matches the given query.")
+        return knowledge_resource
+    
     def get_success_url(self):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
@@ -193,6 +211,24 @@ class ResearchProjectCreateView(CreateView):
     def get_success_url(self):
         # Use self.object to access the updated form instance
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
+class ResearchProjectUpdateView(UpdateView):
+    model = ResearchProject
+    form_class = ResearchProjectModelForm
+    template_name = 'selfappraisal/form/create_research_projects.html'
+    success_message = "Hello" # TODO: ADD
+
+    def get_object(self, queryset=None):
+        research_project_id = self.kwargs.get('research_project_id')
+        research_project = get_object_or_404(ResearchProject, id=research_project_id)
+
+        if research_project.form.id != self.kwargs['pk']:
+            raise Http404("No matches the given query.")
+        return research_project
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
     
 
 class PublicationCreateView(CreateView):
@@ -204,6 +240,44 @@ class PublicationCreateView(CreateView):
     def form_valid(self, form):
         form.instance.form = SelfAppraisalForm.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+    
+
+class PublicationUpdateView(UpdateView):
+    model = Publication
+    form_class = PublicationModelForm
+    template_name = 'selfappraisal/form/create_books_publications.html'
+    success_message = "Hello" # TODO: ADD
+
+    def get_object(self, queryset=None):
+        publication_id = self.kwargs.get('publication_id')
+        publication = get_object_or_404(Publication, id=publication_id)
+
+        if publication.form.id != self.kwargs['pk']:
+            raise Http404("No matches the given query.")
+        return publication
+
+    def get_success_url(self):
+        # Use self.object to access the updated form instance
+        return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
+
+
+class ResearchGuidanceUpdateView(UpdateView):
+    model = ResearchGuidance
+    form_class = ResearchGuidanceModelForm
+    template_name = 'selfappraisal/form/create_research_guidance.html'
+    success_message = "Hello" # TODO: ADD
+
+    def get_object(self, queryset=None):
+        research_guidance_id = self.kwargs.get('research_guidance_id')
+        research_guidance = get_object_or_404(ResearchGuidance, id=research_guidance_id)
+
+        if research_guidance.form.id != self.kwargs['pk']:
+            raise Http404("No matches the given query.")
+        return research_guidance
 
     def get_success_url(self):
         # Use self.object to access the updated form instance

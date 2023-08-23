@@ -20,18 +20,23 @@ urlpatterns = [
 
     # Course CRUD
     path('form/<int:pk>/course/create/', views.CourseCreateView.as_view(), name="create-course"),
+    path('form/<int:pk>/course/<int:course_id>/update/', views.CourseUpdateView.as_view(), name="update-course"),
 
     # Knowledge Resources CRUD
     path('form/<int:pk>/knowledge-resources/create/', views.KnowledgeResourcesCreateView.as_view(), name="create-knowledge-resources"),
+    path('form/<int:pk>/knowledge-resources/<int:knowledge_resource_id>/update/', views.KnowledgeResourcesUpdateView.as_view(), name="update-knowledge-resources"),
 
     # Research Project CRUD
     path('form/<int:pk>/research-project/create/', views.ResearchProjectCreateView.as_view(), name="create-research-project"),
+    path('form/<int:pk>/research-project/<int:research_project_id>/update/', views.ResearchProjectUpdateView.as_view(), name="update-research-project"),
 
     # Publication CRUD
     path('form/<int:pk>/publication/create/', views.PublicationCreateView.as_view(), name="create-publication"),
+    path('form/<int:pk>/publication/<int:publication_id>/update/', views.PublicationUpdateView.as_view(), name="update-publication"),
 
     # Research Guidance CRUD
     path('form/<int:pk>/research-guidance/create/', views.ResearchGuidanceCreateView.as_view(), name="create-research-guidance"),
+    path('form/<int:pk>/research-guidance/<int:research_guidance_id>/update/', views.ResearchGuidanceUpdateView.as_view(), name="update-research-guidance"),
 
     # Evolution of Courses CRUD
     path('form/<int:pk>/evolution-of-courses/create/', views.EvolutionOfCoursesCreateView.as_view(), name="create-evolution-of-courses"),

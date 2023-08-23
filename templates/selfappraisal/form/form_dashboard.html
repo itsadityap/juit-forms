@@ -174,7 +174,7 @@
                                                 <td>{{course.total_hours_engaged}}</td>
                                                 <td>
                                                     <div class="row"> 
-                                                        {% comment %} <a class="col-2 " href="{% url 'update-course' form.id course.id %}"><i class="bx bx-edit-alt me-1"></i> </a> {% endcomment %}
+                                                        <a class="col-2 " href="{% url 'update-course' form.id course.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
                                                         {% comment %} <a class="col-2" href="{% url 'delete-course' form.id course.id %}"><i class="bx bx-trash me-1"></i></a> {% endcomment %}
                                                     </div>  
                                                 </td>
@@ -222,7 +222,7 @@
                                                 <td>{{course.total_hours_engaged}}</td>
                                                 <td>
                                                     <div class="row"> 
-                                                        {% comment %} <a class="col-2 " href="{% url 'update-course' form.id course.id %}"><i class="bx bx-edit-alt me-1"></i> </a> {% endcomment %}
+                                                        <a class="col-2 " href="{% url 'update-course' form.id course.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
                                                         {% comment %} <a class="col-2" href="{% url 'delete-course' form.id course.id %}"><i class="bx bx-trash me-1"></i></a> {% endcomment %}
                                                     </div>  
                                                 </td>
@@ -275,7 +275,7 @@
                                                 <td>{{knowledge_resource.additional_resources_provided}}</td>
                                                 <td>
                                                     <div class="row"> 
-                                                        {% comment %} <a class="col-2 " href="{% url 'update-knowledge_resource' form.id knowledge_resource.id %}"><i class="bx bx-edit-alt me-1"></i> </a> {% endcomment %}
+                                                        <a class="col-2 " href="{% url 'update-knowledge-resources' form.id knowledge_resource.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
                                                         {% comment %} <a class="col-2" href="{% url 'delete-knowledge_resource' form.id knowledge_resource.id %}"><i class="bx bx-trash me-1"></i></a> {% endcomment %}
                                                     </div>  
                                                 </td>
@@ -510,7 +510,7 @@
                                         <td>{{publication.publication_type}}</td>
                                         <td>
                                             <div class="row"> 
-                                                <a class="col-2 " href=""><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2 " href="{% url 'update-publication' form.id publication.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
                                                 <a class="col-2" href=""><i class="bx bx-trash me-1"></i></a>
                                             </div>  
                                         </td>
@@ -559,7 +559,7 @@
                                         <td>{{publication.publication_type}}</td>
                                         <td>
                                             <div class="row"> 
-                                                <a class="col-2 " href=""><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2 " href="{% url 'update-publication' form.id publication.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
                                                 <a class="col-2" href=""><i class="bx bx-trash me-1"></i></a>
                                             </div>  
                                         </td>
@@ -612,7 +612,7 @@
                                         <td>{{research_project.chief_investigator}}</td>
                                         <td>
                                             <div class="row"> 
-                                                <a class="col-2 " href=""><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2 " href="{% url 'update-research-project' form.id research_project.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
                                                 <a class="col-2" href=""><i class="bx bx-trash me-1"></i></a>
                                             </div>  
                                         </td>
@@ -646,12 +646,12 @@
                     <table class="table">
                         <thead>
                             <tr>
+                            <th>Enrollment Number</th>
+                            <th>Name</th>
                             <th>Title</th>
-                            <th>Sponsoring Agency</th>
-                            <th>Organization</th>
-                            <th>Place Held</th>
-                            <th>Attended/Organized</th>
-                            <th>Actions</th>
+                            <th>Joint Supervisors</th>
+                            <th>Level</th>
+                            <th>Status</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -663,15 +663,14 @@
                                         <td>{{research_guidance.title_of_thesis}}</td>
                                         <td>{{research_guidance.names_of_joint_supervisors}}</td>
                                         <td>{{research_guidance.level}}</td>
-                                        <td>{{research_guidance.status}}</td>
                                         <td>
-                                            <span class="badge bg-label-{% if event.attended_organized == "Organized" %}primary{% else %}info{% endif %} me-1">
-                                                {{event.attended_organized}}
+                                            <span class="badge bg-label-{% if research_guidance.status == "Completed" %}primary{% else %}info{% endif %} me-1">
+                                                {{research_guidance.status}}
                                             </span>    
                                         </td>
                                         <td>
                                             <div class="row"> 
-                                                <a class="col-2 " href=""><i class="bx bx-edit-alt me-1"></i> </a>
+                                                <a class="col-2 " href="{% url 'update-research-guidance' form.id research_guidance.id %}"><i class="bx bx-edit-alt me-1"></i> </a>
                                                 <a class="col-2" href=""><i class="bx bx-trash me-1"></i></a>
                                             </div>  
                                         </td>

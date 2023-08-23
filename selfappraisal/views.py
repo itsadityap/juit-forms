@@ -170,7 +170,7 @@ def delete_event_view(request, pk, event_id):
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
     return HttpResponseRedirect(formdashboard_url)
 
-class CourseCreateView(LoginRequiredMixin,CreateView,FormOwnershipCheckOnCreateMixin):
+class CourseCreateView(LoginRequiredMixin,FormOwnershipCheckOnCreateMixin,CreateView):
     model = Course
     form_class = CourseModelForm
     template_name = 'selfappraisal/form/create_course.html'
@@ -183,7 +183,7 @@ class CourseCreateView(LoginRequiredMixin,CreateView,FormOwnershipCheckOnCreateM
     def get_success_url(self):
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
-class CourseUpdateView(LoginRequiredMixin,UpdateView,FormOwnershipCheckMixin):
+class CourseUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,UpdateView):
     model = Course
     form_class = CourseModelForm
     template_name = 'selfappraisal/form/create_course.html'
@@ -213,7 +213,7 @@ def delete_course_view(request, pk, course_id):
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
     return HttpResponseRedirect(formdashboard_url)
 
-class KnowledgeResourcesCreateView(LoginRequiredMixin,CreateView, FormOwnershipCheckOnCreateMixin):
+class KnowledgeResourcesCreateView(LoginRequiredMixin,FormOwnershipCheckOnCreateMixin,CreateView):
     model = KnowledgeResources
     form_class = KnowledgeResourcesModelForm
     template_name = 'selfappraisal/form/create_resource.html'
@@ -226,7 +226,7 @@ class KnowledgeResourcesCreateView(LoginRequiredMixin,CreateView, FormOwnershipC
     def get_success_url(self):
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
-class KnowledgeResourcesUpdateView(LoginRequiredMixin,UpdateView, FormOwnershipCheckMixin):
+class KnowledgeResourcesUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,UpdateView):
     model = KnowledgeResources
     form_class = KnowledgeResourcesModelForm
     template_name = 'selfappraisal/form/create_resource.html'
@@ -256,7 +256,7 @@ def delete_knowledge_resources_view(request, pk, knowledge_resource_id):
     return HttpResponseRedirect(formdashboard_url)
 
 
-class ResearchProjectCreateView(LoginRequiredMixin,CreateView, FormOwnershipCheckOnCreateMixin):
+class ResearchProjectCreateView(LoginRequiredMixin,FormOwnershipCheckOnCreateMixin,CreateView):
     model = ResearchProject
     form_class = ResearchProjectModelForm
     template_name = 'selfappraisal/form/create_research_projects.html'
@@ -269,7 +269,7 @@ class ResearchProjectCreateView(LoginRequiredMixin,CreateView, FormOwnershipChec
     def get_success_url(self):
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
-class ResearchProjectUpdateView(LoginRequiredMixin,UpdateView,FormOwnershipCheckMixin):
+class ResearchProjectUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,UpdateView):
     model = ResearchProject
     form_class = ResearchProjectModelForm
     template_name = 'selfappraisal/form/create_research_projects.html'
@@ -299,7 +299,7 @@ def delete_research_project_view(request, pk, research_project_id):
     return HttpResponseRedirect(formdashboard_url)
 
 
-class PublicationCreateView(LoginRequiredMixin,CreateView, FormOwnershipCheckOnCreateMixin):
+class PublicationCreateView(LoginRequiredMixin,FormOwnershipCheckOnCreateMixin,CreateView):
     model = Publication
     form_class = PublicationModelForm
     template_name = 'selfappraisal/form/create_books_publications.html'
@@ -313,7 +313,7 @@ class PublicationCreateView(LoginRequiredMixin,CreateView, FormOwnershipCheckOnC
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
     
 
-class PublicationUpdateView(LoginRequiredMixin,UpdateView,FormOwnershipCheckMixin):
+class PublicationUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,UpdateView):
     model = Publication
     form_class = PublicationModelForm
     template_name = 'selfappraisal/form/create_books_publications.html'
@@ -344,7 +344,7 @@ def delete_publication_view(request, pk, publication_id):
     return HttpResponseRedirect(formdashboard_url)
 
 
-class ResearchGuidanceUpdateView(LoginRequiredMixin,UpdateView, FormOwnershipCheckMixin):
+class ResearchGuidanceUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,UpdateView):
     model = ResearchGuidance
     form_class = ResearchGuidanceModelForm
     template_name = 'selfappraisal/form/create_research_guidance.html'
@@ -362,7 +362,7 @@ class ResearchGuidanceUpdateView(LoginRequiredMixin,UpdateView, FormOwnershipChe
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
 
-class ResearchGuidanceCreateView(LoginRequiredMixin,CreateView, FormOwnershipCheckOnCreateMixin):
+class ResearchGuidanceCreateView(LoginRequiredMixin, FormOwnershipCheckOnCreateMixin,CreateView):
     model = ResearchGuidance
     form_class = ResearchGuidanceModelForm
     template_name = 'selfappraisal/form/create_research_guidance.html'
@@ -387,7 +387,7 @@ def delete_research_guidance_view(request, pk, research_guidance_id):
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
     return HttpResponseRedirect(formdashboard_url)
 
-class EvolutionOfCoursesCreateView(LoginRequiredMixin,CreateView,FormOwnershipCheckOnCreateMixin):
+class EvolutionOfCoursesCreateView(LoginRequiredMixin,FormOwnershipCheckOnCreateMixin,CreateView):
     model = EvaluationDuties
     form_class = EvaluationDutiesForm
     template_name = 'selfappraisal/form/create_evolution_duties.html'
@@ -400,7 +400,7 @@ class EvolutionOfCoursesCreateView(LoginRequiredMixin,CreateView,FormOwnershipCh
     def get_success_url(self):
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
 
-class EvolutionOfCoursesUpdateView(LoginRequiredMixin,UpdateView, FormOwnershipCheckMixin):
+class EvolutionOfCoursesUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,UpdateView):
     model = EvaluationDuties
     form_class = EvaluationDutiesForm
     template_name = 'selfappraisal/form/create_evolution_duties.html'

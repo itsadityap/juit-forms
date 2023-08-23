@@ -50,10 +50,6 @@ def check_model_ownership(request, model_obj):
         return False
 
 
-@login_required
-def home_view(request):
-    return render(request, 'selfappraisal/dashboard/dashboard.html', {})
-
 class SelfAppraisalFormCreateView(LoginRequiredMixin, CreateView):
     model = SelfAppraisalForm
     form_class = SelfAppraisalFormModelFormMain
@@ -418,6 +414,7 @@ class EvolutionOfCoursesUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,Up
     def get_success_url(self):
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
     
+
 @login_required
 def form_dashboard_view(request, pk):
 
@@ -465,3 +462,15 @@ def form_dashboard_view(request, pk):
                         'evaluation_duties': evaluation_duties
                     }
                 )
+
+
+@login_required
+def home_view(request):
+    forms_drafted = SelfAppraisalForm.objects.filter(name=request.user,self_approval = False )
+    forms_under_review = SelfAppraisalForm.objects.filter(name=request.user,self_approval = True, vc_approval = False)
+    forms_approved = SelfAppraisalForm.objects.filter(name=request.user,vc_approval=True)
+    return render(request, 'selfappraisal/dashboard/dashboard.html', {
+        'forms_drafted':forms_drafted,
+        'forms_under_review':forms_under_review,
+        'forms_approved':forms_approved
+        })

@@ -47,20 +47,25 @@ class SelfAppraisalForm(models.Model):
 
     pursuing_higher_studies = models.TextField(verbose_name="10. Pursuing Higher Studies (Give full details)",null=True, blank=True) # Pursuing Higher Studies
 
+    # Knowledge Resources
     learning_methodology = models.TextField(verbose_name="Participatory/Innovative Teaching Learning Methodologies used (give brief details)",null=True, blank=True)
 
     modifications_in_teaching = models.TextField(verbose_name="Any Modification/ Addition to syllabus (give brief details)",null=True, blank=True) 
 
     beyond_syllabus = models.TextField(verbose_name="Any Coverage/ Introduction beyond syllabus ( give brief details )",null=True, blank=True) 
 
-    # courses remarks
+    knowledge_resources_remarks = models.TextField(verbose_name="Knowledge Resources Remarks (give details)",null=True, blank=True)
+
+    # courses remarks by HOD
     courses_remarks_odd = models.TextField(verbose_name="Remarks by the HoD",null=True, blank=True)
     courses_remarks_even = models.TextField(verbose_name="Remarks by the HoD",null=True, blank=True)
 
     # Number of Projects Guided
 
     projects_guided = models.PositiveIntegerField(null=True, blank=True) # UG Projects Guided
+    projects_guided_remarks = models.TextField(verbose_name="Number of Projects Guided Remarks by the HoD",null=True, blank=True)
     students_guided = models.PositiveIntegerField(null=True, blank=True) # UG Students Guided
+    students_guided_remarks = models.TextField(verbose_name="Number of Students Guided Remarks by the HoD",null=True, blank=True)
 
     # Contribution/Participation in Students Extra & Co-Curricular activities
     students_extra_curricular = models.TextField(verbose_name="(A) Contribution/ Participation in Students Extra & Co- Curricular activities:",blank=True)

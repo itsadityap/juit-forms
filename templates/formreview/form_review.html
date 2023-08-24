@@ -181,7 +181,7 @@
                             </table>
                         </div>
                     </div>
-
+                    
                     <div class="card mb-4">
                         <h5 class="card-header">
                             <div class="row align-items-center">
@@ -227,6 +227,25 @@
                                     {% endif %}
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Remarks for ODD Semester:</label>
+                                    <textarea class="form-control" disabled/>{{form.courses_remarks_odd}}</textarea>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Remarks for EVEN Semester:</label>
+                                    <textarea class="form-control" disabled/>{{form.courses_remarks_even}}</textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row justify-content-end">
+                                <a href="{% url 'formreview:add-course-remark' form.id %}" type="submit" class="btn btn-primary col-2">Add/ Edit Remarks</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -301,6 +320,15 @@
                                 <label class="form-label">Any Coverage/ Introduction beyond syllabus (give brief details):</label>
                                 <textarea class="form-control" disabled/>{{form.beyond_syllabus}}</textarea>
                             </div>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Remarks</label>
+                                <textarea class="form-control" disabled/>{{form.knowledge_resources_remarks}}</textarea>
+                            </div>
+                            
+                        </div>
+                        <br>
+                        <div class="row justify-content-end">
+                            <a href="{% url 'formreview:add-knowledge-remark' form.id %}" type="submit" class="btn btn-primary col-2">Add/ Edit Remarks</a>
                         </div>
                         
                     </div>
@@ -320,13 +348,28 @@
                             </div>
     
                             <div class="mb-3 col-md-6">
-                                <label class="form-label">Number of Students Guided:</label>
-                                <textarea class="form-control" disabled/>{{form.students_guided}}</textarea>
+                                <label class="form-label">Remarks:</label>
+                                <textarea class="form-control" disabled/>{{form.projects_guided_remarks}}</textarea>
                             </div>
                         </div>
                         
-                   
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Number of Students Guided:</label>
+                                <textarea class="form-control" disabled/>{{form.students_guided}}</textarea>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Remarks:</label>
+                                <textarea class="form-control" disabled/>{{form.students_guided_remarks}}</textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row justify-content-end">
+                            <a href="{% url 'formreview:add-students-remark' form.id %}" type="submit" class="btn btn-primary col-2">Add/ Edit Remarks</a>
+                        </div>
                     </div>
+                   
+                   
                     <!-- /Account -->
                 </div>
 

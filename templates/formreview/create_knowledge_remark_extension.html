@@ -1,0 +1,74 @@
+{% extends "base_with_nav.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Appraisal</h4>
+      <!-- Basic Layout -->
+      <div class="row">
+        <div class="col-xl">
+          <div class="card mb-4">
+
+            <form method="POST">
+                {% csrf_token %}
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Knowledge Resource</h4>
+              <small class="text-muted float-end">"USE THIS"</small>
+            </div>
+            <div class="card-body">
+              
+                <div class="row mb-3"> 
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.learning_methodology.id_for_label }}">{{form.learning_methodology.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.learning_methodology.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.learning_methodology|add_class:"form-control"|attr:"readonly" %}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.department.id_for_label }}">{{form.modifications_in_teaching.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.modifications_in_teaching.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.modifications_in_teaching|add_class:"form-control"|attr:"readonly" %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3"> 
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.department.id_for_label }}">{{form.beyond_syllabus.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.beyond_syllabus.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.beyond_syllabus|add_class:"form-control"|attr:"readonly" %}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" for="{{ form.knowledge_resources_remarks.id_for_label }}">{{form.knowledge_resources_remarks.label}}</label>
+                        <div class="input-group input-group-merge">
+                            <span id="{{ form.knowledge_resources_remarks.id_for_label }}" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                            {% render_field form.knowledge_resources_remarks|add_class:"form-control"|attr:"placeholder:Your knowledge_resources_remarks" %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end">
+                    <button type="submit" class="btn btn-primary col-2" id="formsubmit">Save and Next</button>
+                </div>
+            </div>
+        </form>
+        </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      
+    </div>
+{% endblock content %}
+

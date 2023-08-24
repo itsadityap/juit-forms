@@ -6,7 +6,7 @@ from django.views.generic import UpdateView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
-from formreview.form import EventModelRemarkForm
+from formreview.form import EventModelRemarkForm, SelfAppraisalFormCourseRemarkForm, SelfAppraisalKnowledge, SelfAppraisalFormStudents
 
 from django.http import Http404
 
@@ -69,3 +69,38 @@ class AddEventRemarkView(UpdateView):
         return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
 
 
+class SelfAppraisalCourseRemarkExtensionView(UpdateView):
+    model = SelfAppraisalForm
+    form_class = SelfAppraisalFormCourseRemarkForm
+    template_name = 'formreview/create_course_remark_extension.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
+    
+class SelfAppraisalStudentsRemarkExtensionView(UpdateView):
+    model = SelfAppraisalForm
+    form_class = SelfAppraisalFormStudents
+    template_name = 'formreview/create_student_remark_extension.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
+
+class SelfAppraisalKnowledgeRemark(UpdateView):
+    model = SelfAppraisalForm
+    form_class = SelfAppraisalKnowledge
+    template_name = 'formreview/create_knowledge_remark_extension.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})

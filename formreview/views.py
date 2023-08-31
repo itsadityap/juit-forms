@@ -6,7 +6,7 @@ from django.views.generic import UpdateView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
-from formreview.form import EventModelRemarkForm, SelfAppraisalFormCourseRemarkForm, SelfAppraisalKnowledge, SelfAppraisalFormStudents
+from formreview.form import EventModelRemarkForm
 
 from django.http import Http404
 
@@ -71,7 +71,10 @@ class AddEventRemarkView(UpdateView):
 
 class SelfAppraisalCourseRemarkExtensionView(UpdateView):
     model = SelfAppraisalForm
-    form_class = SelfAppraisalFormCourseRemarkForm
+    fields = [
+        'courses_remarks_odd',
+        'courses_remarks_even'
+    ]
     template_name = 'formreview/create_course_remark_extension.html'
     success_message = "Form updated successfully"
 
@@ -83,7 +86,10 @@ class SelfAppraisalCourseRemarkExtensionView(UpdateView):
     
 class SelfAppraisalStudentsRemarkExtensionView(UpdateView):
     model = SelfAppraisalForm
-    form_class = SelfAppraisalFormStudents
+    fields = [
+        'projects_guided_remarks',
+        'students_guided_remarks'
+    ]
     template_name = 'formreview/create_student_remark_extension.html'
     success_message = "Form updated successfully"
 
@@ -95,8 +101,86 @@ class SelfAppraisalStudentsRemarkExtensionView(UpdateView):
 
 class SelfAppraisalKnowledgeRemark(UpdateView):
     model = SelfAppraisalForm
-    form_class = SelfAppraisalKnowledge
+    fields = [
+        'learning_methodology',
+        'modifications_in_teaching',
+        'beyond_syllabus',
+        'knowledge_resources_remarks'
+    ]
     template_name = 'formreview/create_knowledge_remark_extension.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
+    
+class SelfAppraisalExaminationDutiesRemark(UpdateView):
+    model = SelfAppraisalForm
+    fields = ['examination_duties_remarks']
+    template_name = 'formreview/create_evaluation_duties_extension.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
+
+#Research Papers Published/ Presented:
+class SelfAppraisalResearchPaperRemark(UpdateView):
+    model = SelfAppraisalForm
+    fields = ['research_paper_remarks']
+    template_name = 'formreview/create_extension_form.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
+    
+class SelfAppraisalBooksRemark(UpdateView):
+    model = SelfAppraisalForm
+    fields = ['books_remarks']
+    template_name = 'formreview/create_extension_form.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
+    
+class SelfAppraisalResearchProjectsRemark(UpdateView):
+    model = SelfAppraisalForm
+    fields = ['research_projects_remarks']
+    template_name = 'formreview/create_extension_form.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
+
+class SelfAppraisalResearchGuidanceRemark(UpdateView):
+    model = SelfAppraisalForm
+    fields = ['research_guidance_remarks']
+    template_name = 'formreview/create_extension_form.html'
+    success_message = "Form updated successfully"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("formreview:form_review", kwargs={'pk': self.kwargs['pk']})
+
+class SelfAppraisalOverallRemarksemark(UpdateView):
+    model = SelfAppraisalForm
+    fields = ['overall_remarks']
+    template_name = 'formreview/create_extension_form.html'
     success_message = "Form updated successfully"
 
     def form_valid(self, form):

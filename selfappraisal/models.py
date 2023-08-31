@@ -25,7 +25,7 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
-
+# TODO: MAKE APPROVAL CHOICES 
 class SelfAppraisalForm(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # Name
     
@@ -67,6 +67,10 @@ class SelfAppraisalForm(models.Model):
     students_guided = models.PositiveIntegerField(null=True, blank=True) # UG Students Guided
     students_guided_remarks = models.TextField(verbose_name="Number of Students Guided Remarks by the HoD",null=True, blank=True)
 
+    # 12.4 Examination and Evaluation Duties:
+    examination_duties_remarks = models.TextField(verbose_name="Remarks by the HoD",null=True, blank=True)
+
+
     # Contribution/Participation in Students Extra & Co-Curricular activities
     students_extra_curricular = models.TextField(verbose_name="(A) Contribution/ Participation in Students Extra & Co- Curricular activities:",blank=True)
     
@@ -90,6 +94,13 @@ class SelfAppraisalForm(models.Model):
     any_other_information = models.TextField(blank=True)
     list_of_enclosures = models.TextField(blank=True)
 
+    research_paper_remarks = models.TextField(verbose_name="Remarks by HOD", blank=True)
+    books_remarks = models.TextField(verbose_name="Remarks by HOD", blank=True)
+
+    research_projects_remarks = models.TextField(verbose_name="Remarks by HOD", blank=True)
+    research_guidance_remarks = models.TextField(verbose_name="Remarks by HOD", blank=True)
+
+    overall_remarks = models.TextField(verbose_name="Overall Remarks by HOD", blank=True)
 
     # Fields to track the approval status
     self_approval = models.BooleanField(default=False)   # Means the form is filled by the user

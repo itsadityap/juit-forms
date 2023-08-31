@@ -460,6 +460,20 @@
                   
                     
                 </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Remarks Examination and Evaluation Duties:</label>
+                                <textarea class="form-control" disabled/>{{form.examination_duties_remarks}}</textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row justify-content-end">
+                            <a href="{% url 'formreview:add-duties-remark' form.id %}" type="submit" class="btn btn-primary col-2">Add/ Edit Remarks</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="card mb-4">
@@ -540,6 +554,21 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Remarks by the HoD:</label>
+                                <textarea class="form-control" disabled/>{{form.research_paper_remarks}}</textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row justify-content-end">
+                            <a href="{% url 'formreview:add-research-paper-remark' form.id %}" type="submit" class="btn btn-primary col-2">Add/ Edit Remarks</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="card mb-4">
@@ -587,6 +616,20 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Remarks by the HoD:</label>
+                                <textarea class="form-control" disabled/>{{form.books_remarks}}</textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row justify-content-end">
+                            <a href="{% url 'formreview:add-books-remark' form.id %}" type="submit" class="btn btn-primary col-2">Add/ Edit Remarks</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="card mb-4">
@@ -601,7 +644,7 @@
                     </div>
                 </h5>
                 
-                   <div class="table-responsive text-nowrap">
+                <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead>
                             <tr>
@@ -637,6 +680,20 @@
                             {% endif %}
                         </tbody>
                     </table>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Remarks by the HoD:</label>
+                                <textarea class="form-control" disabled/>{{form.research_projects_remarks}}</textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row justify-content-end">
+                            <a href="{% url 'formreview:add-research-projects-remark' form.id %}" type="submit" class="btn btn-primary col-2">Add/ Edit Remarks</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -694,6 +751,21 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Remarks by the HoD:</label>
+                                <textarea class="form-control" disabled/>{{form.research_guidance_remarks}}</textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row justify-content-end">
+                            <a href="{% url 'formreview:add-research-guidance-remark' form.id %}" type="submit" class="btn btn-primary col-2">Add/ Edit Remarks</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="card mb-4">
@@ -713,9 +785,22 @@
                                 <label class="form-label">20. List of Enclosures:</label>
                                 <textarea class="form-control" disabled/>{{form.list_of_enclosures}}</textarea>
                             </div>
+                        </div>                   
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Overall Remarks by the HoD:</label>
+                                <textarea class="form-control" disabled/>{{form.overall_remarks}}</textarea>
+                            </div>
                         </div>
-                        
-                   
+                        <br>
+                        <div class="row justify-content-end">
+                            <a href="{% url 'formreview:add-overall-hod' form.id %}" type="submit" class="btn btn-primary col-2">Add/ Edit Remarks</a>
+                        </div>
+
                 </div>
             </div>
 

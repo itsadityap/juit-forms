@@ -1,23 +1,49 @@
 from django.shortcuts import render
 from selfappraisal.models import SelfAppraisalForm, Event, Course, KnowledgeResources, ResearchProject, Publication, ResearchGuidance, EvaluationDuties
 # Create your views here.
+from django.http import Http404, HttpResponseRedirect
 
 from django.views.generic import UpdateView
 from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from formreview.form import EventModelRemarkForm
 
 from django.http import Http404
 
 def home(request):
-    draft_forms = SelfAppraisalForm.objects.filter(department=request.user.department).filter(
-        self_approval=True, hod_approval=False, dean_approval=False, vc_approval=False
-    )
+    draft_forms = None
+
+    if request.user.user_type == 1:
+        draft_forms = SelfAppraisalForm.objects.filter(department=request.user.department).filter(
+            self_approval=True, hod_approval=False, dean_approval=False, vc_approval=False
+        )
+    elif request.user.user_type == 2:
+        draft_forms = SelfAppraisalForm.objects.filter(
+            self_approval=True, hod_approval=True, dean_approval=False, vc_approval=False
+        )
+    elif request.user.user_type == 3:
+        draft_forms = SelfAppraisalForm.objects.filter(
+            self_approval=True, hod_approval=True, dean_approval=True, vc_approval=False
+        )
+
     return render(request, 'formreview/form_list.html', context={'draft_forms': draft_forms})
 
 def form_review(request, pk):
     mainform_obj = SelfAppraisalForm.objects.get(id=pk)
+
+    if request.method == 'POST':
+        sumitcheck = request.POST.get('submitform')
+        if sumitcheck:
+            if request.user.user_type == 1:
+                mainform_obj.hod_approval = True
+            elif request.user.user_type == 2:
+                mainform_obj.dean_approval = True
+            elif request.user.user_type == 3:
+                mainform_obj.vc_approval = True
+                
+            mainform_obj.save()
+            return HttpResponseRedirect(reverse('home'))
 
     events = Event.objects.filter(form=mainform_obj)
     oddsemcourses = Course.objects.filter(form=mainform_obj, course_type=1)

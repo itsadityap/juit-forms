@@ -35,7 +35,7 @@
             </li>
             
       
-            {% if request.user.user_type == 1 %}
+            {% if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 3 %}
               <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Reviewer Options</span>
               </li>

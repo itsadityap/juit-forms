@@ -38,6 +38,7 @@ urlpatterns = [
     path('form/<int:pk>/publication/<int:publication_id>/update/', views.PublicationUpdateView.as_view(), name="update-publication"),
     path('form/<int:pk>/publication/<int:publication_id>/delete/', views.delete_publication_view, name="delete-publication"),
     path('form/<int:pk>/publication/googlescholar/', views.publication_using_google_scholar, name="google-publication"),
+    path('form/<int:pk>/publication/juitpub/', views.publication_using_juitpub, name="juit-publication"),
 
     # Research Guidance CRUD
     path('form/<int:pk>/research-guidance/create/', views.ResearchGuidanceCreateView.as_view(), name="create-research-guidance"),

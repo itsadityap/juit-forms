@@ -315,7 +315,7 @@ class PublicationCreateView(LoginRequiredMixin,FormOwnershipCheckOnCreateMixin,C
 
 
 import threading
-from selfappraisal.background_utils import add_research_paper
+from selfappraisal.background_utils import add_research_paper, add_juit_pub
 
 @login_required
 def publication_using_google_scholar(request, pk):
@@ -336,9 +336,9 @@ def publication_using_juitpub(request, pk):
     if request.method == "POST":
         mainform_obj = SelfAppraisalForm.objects.get(pk=pk)
 
-        author_id = request.POST.get("google_profile_id")
+        author_id = request.POST.get("faculty_id")
         
-        threading.Thread(target=add_research_paper, args=(author_id, mainform_obj)).start()
+        threading.Thread(target=add_juit_pub, args=(author_id, mainform_obj)).start()
         
     formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
     return HttpResponseRedirect(formdashboard_url)    

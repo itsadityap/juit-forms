@@ -43,13 +43,42 @@
                             </div>
                             
                             <div class="row justify-content-end">
-                                <button type="submit" class="btn btn-primary col-2" id="formsubmit">Create Publication</button>
+                                <button type="submit" class="btn btn-primary col-2" id="formsubmit">{% if object %}Update{% else %}Create{% endif %} Publication</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        {% if not object %}
+            <div class="row">
+                <div class="col-xl">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h4 class="mb-0">Add Using Google Scholar</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="{% url 'google-publication' pk %}">
+                                {% csrf_token %}
+                                
+                                <div class="mb-3">
+                                    <label class="form-label" for="{{ form.author_names.id_for_label }}">Google Scholar Profile ID</label>
+                                    <input type="text" class="form-control" name="google_profile_id" placeholder="Enter Google Scholar Profile ID Here..">
+                                </div>
+                                                    
+                                <div class="row justify-content-end">
+                                    <button type="submit" class="btn btn-primary col-2" id="formsubmit">Add All</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
+    
+    
 </div>
+
+
 {% endblock content %}

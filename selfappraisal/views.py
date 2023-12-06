@@ -301,13 +301,47 @@ class PublicationCreateView(LoginRequiredMixin,FormOwnershipCheckOnCreateMixin,C
     template_name = 'selfappraisal/form/create_books_publications.html'
     success_message = "Publication Created Succesfully" 
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pk'] = self.kwargs.get('pk')
+        return context
+    
     def form_valid(self, form):
         form.instance.form = self.parent_form
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy("formdashboard", kwargs={'pk': self.kwargs['pk']})
-    
+
+
+import threading
+from selfappraisal.background_utils import add_research_paper
+
+@login_required
+def publication_using_google_scholar(request, pk):
+
+    if request.method == "POST":
+        mainform_obj = SelfAppraisalForm.objects.get(pk=pk)
+
+        author_id = request.POST.get("google_profile_id")
+        
+        threading.Thread(target=add_research_paper, args=(author_id, mainform_obj)).start()
+        
+    formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
+    return HttpResponseRedirect(formdashboard_url)    
+
+@login_required
+def publication_using_juitpub(request, pk):
+
+    if request.method == "POST":
+        mainform_obj = SelfAppraisalForm.objects.get(pk=pk)
+
+        author_id = request.POST.get("google_profile_id")
+        
+        threading.Thread(target=add_research_paper, args=(author_id, mainform_obj)).start()
+        
+    formdashboard_url = reverse("formdashboard", kwargs={"pk": pk})
+    return HttpResponseRedirect(formdashboard_url)    
 
 class PublicationUpdateView(LoginRequiredMixin,FormOwnershipCheckMixin,UpdateView):
     model = Publication
@@ -474,3 +508,4 @@ def home_view(request):
         'forms_under_review':forms_under_review,
         'forms_approved':forms_approved
         })
+

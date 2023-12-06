@@ -505,7 +505,7 @@
                             {% if publication_papers  %}
                                 {% for publication in publication_papers %}
                                     <tr>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{publication.author_names}}</strong></td>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{publication.author_names|truncatewords:10 }}</strong></td>
                                         <td>{{publication.title_reference}}</td>
                                         <td>{{publication.publication_type}}</td>
                                         <td>

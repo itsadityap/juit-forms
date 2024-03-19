@@ -1,1 +1,1 @@
-web: gunicorn juit.wsgi --log-file -
+web: gunicorn juit.wsgi
